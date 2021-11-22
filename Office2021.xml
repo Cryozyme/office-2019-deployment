@@ -39,12 +39,12 @@
     <User Key="software\microsoft\office\16.0\common" Name="qmenable" Value="0" Type="REG_DWORD" App="office16" Id="L_EnableCustomerExperienceImprovementProgram" />
     <User Key="software\microsoft\office\16.0\common" Name="updatereliabilitydata" Value="0" Type="REG_DWORD" App="office16" Id="L_UpdateReliabilityPolicy" />
     <User Key="software\microsoft\office\16.0\osm" Name="enablelogging" Value="0" Type="REG_DWORD" App="office16" Id="L_EnableLogging" />
-	<User Key="software\microsoft\office\16.0\common\feedback" Name="surveyenabled" Value="0" Type="REG_DWORD" App="office16" Id="L_SendSurvey" />
+    <User Key="software\microsoft\office\16.0\common\feedback" Name="surveyenabled" Value="0" Type="REG_DWORD" App="office16" Id="L_SendSurvey" />
     <User Key="software\microsoft\office\16.0\common\feedback" Name="enabled" Value="0" Type="REG_DWORD" App="office16" Id="L_SendFeedback" />
     <User Key="software\microsoft\office\16.0\common\feedback" Name="includescreenshot" Value="0" Type="REG_DWORD" App="office16" Id="L_Screenshot" />
     <User Key="software\microsoft\office\16.0\common\feedback" Name="includeemail" Value="0" Type="REG_DWORD" App="office16" Id="L_EmailCollection" />
     <User Key="software\microsoft\office\16.0\common\feedback" Name="feedbackincludelog" Value="0" Type="REG_DWORD" App="office16" Id="L_LogCollection" />
-	<User Key="software\microsoft\office\16.0\firstrun" Name="disablemovie" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableMovie" />
+    <User Key="software\microsoft\office\16.0\firstrun" Name="disablemovie" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableMovie" />
     <User Key="software\microsoft\office\16.0\common\officeupdate" Name="preventteamsinstall" Value="1" Type="REG_DWORD" App="office16" Id="L_PreventTeamsInstall" />
     <User Key="software\microsoft\office\16.0\common\officeupdate" Name="preventbinginstall" Value="1" Type="REG_DWORD" App="office16" Id="L_PreventBingInstall" />
     <User Key="software\microsoft\office\16.0\common\officeupdate" Name="hideupdatenotifications" Value="1" Type="REG_DWORD" App="office16" Id="L_HideUpdateNotifications" />

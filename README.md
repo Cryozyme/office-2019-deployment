@@ -1,6 +1,7 @@
-# office-deployment
+# Office Deployment Repo
 Contains a few xml files for office deployment.
 
+## More Batch Files Coming Soon!
 
 # How To Use:
 

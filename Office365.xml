@@ -7,6 +7,7 @@
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
+      <ExcludeApp ID="OneNote" />
       <ExcludeApp ID="Bing" />
       <ExcludeApp ID="Bing" />
       <ExcludeApp ID="Bing" />
@@ -18,6 +19,7 @@
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
+      <ExcludeApp ID="OneNote" />
       <ExcludeApp ID="Bing" />
       <ExcludeApp ID="Bing" />
       <ExcludeApp ID="Bing" />
@@ -29,6 +31,7 @@
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
+      <ExcludeApp ID="OneNote" />
       <ExcludeApp ID="Bing" />
       <ExcludeApp ID="Bing" />
       <ExcludeApp ID="Bing" />
@@ -37,6 +40,7 @@
       <Language ID="en-us" />
       <Language ID="es-es" />
       <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="OneNote" />
     </Product>
     <Product ID="ProofingTools">
       <Language ID="es-es" />

@@ -1,9 +1,5 @@
 #Downloads latest pscore7 from github
 
-cls
-
-nal print echo
-
 nal nobj New-Object
 
 nal jnp Join-Path
@@ -14,7 +10,7 @@ $releaseBase="download.html"
 
 $version="$urlBase/$releaseBase" #can be latest or another more specific version (ex: $urlBase/$releaseBase/v0.54.0)
 
-$latest=iwr -UseBasicParsing $version
+$latest=iwr -useb $version
 
 $filePattern="-x64.exe" #end of file pattern (ex: in file v0.54.6_linux_ost.tar.gz, the file pattern is _linux_ost.tar.gz)
 
@@ -37,7 +33,5 @@ $fileName="7-zip.exe"
 $cwdLocation="$env:USERPROFILE\custom-programs\" # '.\' means current working directory for the terminal
 
 $wc.DownloadFile($dlurl, (jnp (rvpa "$cwdLocation") "$fileName"))
-
-& "$env:USERPROFILE\custom-programs\7-zip.exe" /S
 
 exit

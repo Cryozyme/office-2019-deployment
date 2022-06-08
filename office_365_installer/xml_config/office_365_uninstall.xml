@@ -1,0 +1,16 @@
+<Configuration>
+<Display Level="None" AcceptEULA="TRUE" />
+<Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+<Remove>
+<Product ID="O365ProPlusRetail">
+</Product>
+<Product ID="O365BusinessRetail">
+</Product>
+<Product ID="VisioProRetail">
+</Product>
+<Product ID="ProjectProRetail">
+</Product>
+<Product ID="AccessRuntimeRetail">
+</Product>
+</Remove>
+</Configuration>

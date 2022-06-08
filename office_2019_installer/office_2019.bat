@@ -1,21 +1,21 @@
 call :main
-pause
 exit /b %errorlevel%
 
 :main
     @echo off & cls
-    set "officeBaseURL=https://www.github.com/Cryozyme/office-deployment/raw/main"
-    set "odtoolPath=%userprofile%\custom-programs\odt2019"
+    set "officeBaseUrl=https://www.github.com/Cryozyme/office-deployment/raw/main"
+    set "odtoolPath=%userprofile%\custom-programs\odtool_2019"
     set "customPrograms=%userprofile%\custom-programs"
     set "arch=%processor_architecture%"
     set "officePath64=%programfiles%\Microsoft Office\Office16"
     set "officePath32=%programfiles(x86)%\Microsoft Office\Office16"
-    set "7zFileName=7z.ps1"
-    set "pwshFileName=pwsh.ps1"
-    set "odtoolFileName=odtool.ps1"
+    set "7zScript=7z.ps1"
+    set "pwshScript=pwsh.ps1"
+    set "odtoolScript=odtool.ps1"
     mkdir "%odtoolPath%" >nul 2>nul
     call :intro
     call :services
+    pause
     call :config
     call :download
     call :odt_extract
@@ -52,15 +52,15 @@ exit /b %errorlevel%
     echo -----------------------------------
     echo ^| DOWNLOADING CONFIGURATION FILES ^|
     echo -----------------------------------
-    set "config_download=^
-        #Invoke-WebRequest -UseBasicParsing %baseURL%/Office2019.xml -out %odtoolPath%\Office2019.xml;^
-        #Invoke-WebRequest -UseBasicParsing %baseURL%/Office2019_Uninstall.xml -out %odtoolPath%\Office2019_Uninstall.xml;^
-        #Invoke-WebRequest -UseBasicParsing %baseURL%/Office365_Uninstall.xml -out %odtoolPath%\Office365_Uninstall.xml;^
-        #Invoke-WebRequest -UseBasicParsing %baseURL%/Office2021_Uninstall.xml -out %odtoolPath%\Office2021_Uninstall.xml;^
-        Invoke-WebRequest -UseBasicParsing https://github.com/Cryozyme/office-deployment/raw/main/odtool.ps1 | Invoke-Expression"
-    pwsh -NoProfile -NoLogo -NonInteractive -Command %config_download% >nul 2>nul
-    pwsh -NoProfile -NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -File %~dp0%7zFileName% >nul 2>nul
-    pwsh -NoProfile -NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -File %~dp0%pwshFileName% >nul 2>nul
+    set config_download=^
+        Invoke-WebRequest -UseBasicParsing "%officeBaseUrl%/office_2019_installer/xml_config/office_2019.xml" -OutFile "%odtoolPath%\office_2019.xml";^
+        Invoke-WebRequest -UseBasicParsing "%officeBaseUrl%/office_2019_installer/xml_config/office_2019_uninstall.xml" -OutFile "%odtoolPath%\office_2019_uninstall.xml";^
+        Invoke-WebRequest -UseBasicParsing "%officeBaseUrl%/office_365_installer/xml_config/office_365_uninstall.xml" -OutFile "%odtoolPath%\office_365_uninstall.xml";^
+        Invoke-WebRequest -UseBasicParsing "%officeBaseUrl%/office_2021_installer/xml_config/office_2021_uninstall.xml" -OutFile "%odtoolPath%\office_2021_uninstall.xml";^
+        Invoke-WebRequest -UseBasicParsing "%officeBaseUrl%/office_2019_installer/prerequisites/7z.ps1" | Invoke-Expression;^
+        Invoke-WebRequest -UseBasicParsing "%officeBaseUrl%/office_2019_installer/prerequisites/pwsh.ps1" | Invoke-Expression;^
+        Invoke-WebRequest -UseBasicParsing "%officeBaseUrl%/office_2019_installer/prerequisites/odtool.ps1" | Invoke-Expression
+    powershell -NoProfile -NoLogo -NonInteractive -Command %config_download%
     exit /b 0
 
 :download
@@ -68,7 +68,7 @@ exit /b %errorlevel%
     echo ^| DOWNLOADING MICROSOFT OFFICE ^2019 PROFESSIONAL PLUS ^|
     echo -------------------------------------------------------
     set deployment_tool=^
-        Invoke-WebRequest -uri %odtoolUrl% -out %odtoolPath%\odt2019.exe
+        Invoke-WebRequest -uri %odtoolUrl% -OutFile %odtoolPath%\odt2019.exe
     pwsh -NoProfile -NoLogo -NonInteractive -Command %deployment_tool% >nul 2>nul
     exit /b 0
 

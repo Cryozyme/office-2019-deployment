@@ -1,4 +1,4 @@
-#Downloads latest pscore7 from github
+#Downloads latest 7zip from 7zip.org
 function Get-7zVersion {
     $urlBase = "https://7-zip.org"
     $releaseBase="download.html"

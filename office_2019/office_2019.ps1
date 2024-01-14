@@ -27,7 +27,6 @@ function fileHandling() {
         if(-not(Test-Path -Path $deployment_tool_path -PathType Container -ErrorAction SilentlyContinue)) {
         
             New-Item -Path "$deployment_tool_path" -ItemType Directory -Force -ErrorAction SilentlyContinue
-            return
         
         } else {
 
@@ -39,6 +38,10 @@ function fileHandling() {
 
         Write-Host "$_" -ErrorAction SilentlyContinue
     
+    } finally {
+
+        configDownload
+
     }
     
     return
@@ -101,7 +104,6 @@ function main() {
     Write-Host ""
 
     installContinue
-    configDownload
     
     return
 

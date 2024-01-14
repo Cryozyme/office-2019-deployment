@@ -5,7 +5,6 @@ Contains a few xml files for office deployment.
 
 # How To Use:
 
-Download repository and then extract contents.
-office-deployment.zip -> officedeployment
-
-Navigate inside of the Office folder of your choice and run the .bat file which will install office and script dependencies.
+1.) Download repository and then extract contents.
+2.) Navigate inside of the Office folder of your choice and run the .bat file.
+Note: The script will delete every other office version on your computer!

@@ -1,0 +1,22 @@
+<Configuration>
+<Display Level="None" AcceptEULA="TRUE" />
+<Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+<Remove>
+<Product ID="ProPlus2019Volume">
+</Product>
+<Product ID="Standard2019Volume">
+</Product>
+<Product ID="VisioPro2019Volume">
+</Product>
+<Product ID="VisioStd2019Volume">
+</Product>
+<Product ID="ProjectPro2019Volume">
+</Product>
+<Product ID="ProjectStd2019Volume">
+</Product>
+<Product ID="SkypeforBusinessEntry2019Retail">
+</Product>
+<Product ID="AccessRuntimeRetail">
+</Product>
+</Remove>
+</Configuration>

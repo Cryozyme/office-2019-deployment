@@ -1,3 +1,3 @@
 Source, Destination
-https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019/xml-config/office-2019.xml, %HomeDrive%\office_deployment\odt_2019\office-2019.xml
-https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019/xml-config/office-2019-uninstall.xml, %HomeDrive%\office_deployment\odt_2019\office-2019-uninstall.xml
+https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019/xml-config/office-2019.xml, $deployment_tool_path\office-2019.xml
+https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019/xml-config/office-2019-uninstall.xml, $deployment_tool_path\office-2019-uninstall.xml

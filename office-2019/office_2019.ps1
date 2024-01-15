@@ -6,7 +6,7 @@ function configDownload() {
         
         Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.csv" -UseBasicParsing -OutFile "$deployment_tool_path\bits-transfer.csv"
         Import-Csv -Path "$deployment_tool_path\bits-transfer.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
-        Remove-Item -Path "$deployment_tool_path\bits-transfer.csv" -Force
+        #Remove-Item -Path "$deployment_tool_path\bits-transfer.csv" -Force
 
     } catch {
 

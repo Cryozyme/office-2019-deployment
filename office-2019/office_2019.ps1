@@ -1,11 +1,11 @@
 function configDownload() {
 
-    $bits_transfer = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019/xml-config/configuration.csv"
+    $config_url = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019/xml-config/configuration.csv"
 
     try {
         
-        Write-Host "Downloading Configuration Files from $bits_transfer"
-        Invoke-WebRequest -UseBasicParsing "$bits_transfer" -OutFile "$deployment_tool_path\configuration.csv"
+        Write-Host "Downloading Configuration Files from $config_url"
+        Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$deployment_tool_path\configuration.csv"
         Set-Location -Path "$deployment_tool_path"
         Import-Csv -Path "$deployment_tool_path\configuration.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
         Set-Location -Path "-"
@@ -34,7 +34,8 @@ function configDownload() {
 
     }
 
-    Start-Process -FilePath "$deployment_tool_path\$file_name" -ArgumentList "/extract:$deployment_tool_path"
+    Start-Process -FilePath "$deployment_tool_path\$file_name" -ArgumentList "/extract:$deployment_tool_path /quiet /passive /norestart" -Wait
+    Remove-Item -Path "$deployment_tool_path\configuration-*.xml", "$deployment_tool_path\$file_name" -Force
     return
 
 }
@@ -53,7 +54,7 @@ function fileHandling() {
         
         } else {
 
-            throw "Installation Path Already Exists"
+            throw "Deployment Path Already Exists"
             
         }
 

@@ -4,7 +4,8 @@ function configDownload() {
 
     try {
         
-        Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.csv" -UseBasicParsing -OutFile "$deployment_tool_path\bits-transfer.csv" | Import-Csv -Path "$deployment_tool_path\bits-transfer.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Asynchronous -Priority High
+        Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.csv" -UseBasicParsing -OutFile "$deployment_tool_path\bits-transfer.csv"
+        Import-Csv -Path "$deployment_tool_path\bits-transfer.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
 
     } catch {
 

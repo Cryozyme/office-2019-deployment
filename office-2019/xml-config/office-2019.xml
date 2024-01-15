@@ -2,7 +2,6 @@
   <Add OfficeClientEdition="64" Channel="PerpetualVL2019">
     <Product ID="ProPlus2019Volume" PIDKEY="NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP">
       <Language ID="en-us" />
-      <Language ID="es-es" />
       <ExcludeApp ID="Groove" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
@@ -10,7 +9,6 @@
     </Product>
     <Product ID="VisioPro2019Volume" PIDKEY="9BGNQ-K37YR-RQHF2-38RQ3-7VCBB">
       <Language ID="en-us" />
-      <Language ID="es-es" />
       <ExcludeApp ID="Groove" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
@@ -18,7 +16,6 @@
     </Product>
     <Product ID="ProjectPro2019Volume" PIDKEY="B4NPR-3FKK7-T2MBV-FRQ4W-PKD2B">
       <Language ID="en-us" />
-      <Language ID="es-es" />
       <ExcludeApp ID="Groove" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
@@ -50,4 +47,5 @@
     <User Key="software\microsoft\office\16.0\common\feedback" Name="feedbackincludelog" Value="0" Type="REG_DWORD" App="office16" Id="L_LogCollection" />
   </AppSettings>
   <Display Level="None" AcceptEULA="TRUE" />
+  <Logging Path "C:\office_deployment\odt_2019\installation.log" />
 </Configuration>

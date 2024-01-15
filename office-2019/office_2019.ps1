@@ -1,6 +1,6 @@
 function configDownload() {
 
-    $script_base_url = "https://www.github.com/Cryozyme/office-deployment/raw/main/office_2019"
+    $script_base_url = "https://www.github.com/Cryozyme/office-deployment/raw/main/office-2019"
 
     try {
         

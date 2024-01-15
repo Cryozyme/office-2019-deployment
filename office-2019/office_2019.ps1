@@ -5,7 +5,7 @@ function configDownload() {
 
     try {
         
-        Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.txt" -UseBasicParsing | Import-Csv | Start-BitsTransfer -TransferType Download -Asynchronous -Priority High
+        Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.txt" -UseBasicParsing | Import-Csv -Delimiter "," | ft#Start-BitsTransfer -TransferType Download -Asynchronous -Priority High
 
     } catch {
 

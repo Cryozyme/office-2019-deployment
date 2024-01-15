@@ -6,6 +6,7 @@ function configDownload() {
         
         Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.csv" -UseBasicParsing -OutFile "$deployment_tool_path\bits-transfer.csv"
         Import-Csv -Path "$deployment_tool_path\bits-transfer.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
+        Remove-Item -Path "$deployment_tool_path\bits-transfer.csv" -Force
 
     } catch {
 
@@ -33,7 +34,7 @@ function fileHandling() {
         
         } else {
 
-            throw "Path Already Exists"
+            throw "Installation Path Already Exists"
             
         }
 
@@ -62,6 +63,7 @@ function serviceHandling() {
     Stop-Process -Name "EXCEL" -Force -ErrorAction SilentlyContinue
     Stop-Process -Name "MSACCESS" -Force -ErrorAction SilentlyContinue
     Stop-Process -Name "MSPUB" -Force -ErrorAction SilentlyContinue
+    fileHandling
     return
 
 }
@@ -75,11 +77,9 @@ function installContinue() {
         if($continue.Trim() -eq "y") {
 
             serviceHandling
-            fileHandling
 
         } elseif ($continue.Trim() -eq "n") {
 
-            Write-Host "Finished"
             return
 
         } else {
@@ -107,6 +107,7 @@ function main() {
     Write-Host ""
 
     installContinue
+    Write-Host "Finished"
     
     return
 

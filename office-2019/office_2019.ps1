@@ -1,11 +1,10 @@
 function configDownload() {
 
     $script_base_url = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019"
-    Write-Host "configDownload"
 
     try {
         
-        Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.txt" -UseBasicParsing | Import-Csv -Delimiter "," | ft#Start-BitsTransfer -TransferType Download -Asynchronous -Priority High
+        Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.csv" -UseBasicParsing -OutFile "$deployment_tool_path\bits-transfer.csv" | Import-Csv -Path "$deployment_tool_path\bits-transfer.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Asynchronous -Priority High
 
     } catch {
 
@@ -57,11 +56,11 @@ function serviceHandling() {
     sc.exe stop "ClickToRunSvc" | Out-Null
     sc.exe stop "wuauserv" | Out-Null
     sc.exe stop "ose64" | Out-Null
-    Stop-Process -Name "WINWORD" -Force | Out-Null
-    Stop-Process -Name "POWERPNT" -Force | Out-Null
-    Stop-Process -Name "EXCEL" -Force | Out-Null
-    Stop-Process -Name "MSACCESS" -Force | Out-Null
-    Stop-Process -Name "MSPUB" -Force | Out-Null
+    Stop-Process -Name "WINWORD" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "POWERPNT" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "EXCEL" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "MSACCESS" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "MSPUB" -Force -ErrorAction SilentlyContinue
     return
 
 }

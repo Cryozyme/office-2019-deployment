@@ -4,13 +4,15 @@ function configDownload() {
 
     try {
         
-        Import-CSV -Path "$script_base_url/xml-config/bits-transfer.txt" | Start-BitsTransfer -TransferType Download
+        Invoke-RestMethod -Uri "$script_base_url/xml-config/bits-transfer.txt" -UseBasicParsing -OutFile "$deployment_tool_path\bits-transfer.txt" | Import-Csv | Start-BitsTransfer -TransferType Download
 
-    }
-    catch {
+    } catch {
+
         Write-Host "$_" -ErrorAction SilentlyContinue
         Pause
+
     }
+
     return
 
 }
@@ -20,7 +22,7 @@ function fileHandling() {
 
     #Variables
     $deployment_tool_path = "$env:homedrive\office_deployment\odt_2019"
-    $cpu_architecture = "$env:processor_architecture"
+    #$cpu_architecture = "$env:processor_architecture"
 
     try {
         

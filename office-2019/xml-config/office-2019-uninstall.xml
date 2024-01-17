@@ -12,5 +12,5 @@
   <RemoveMSI />
   <Display Level="None" AcceptEULA="TRUE" />
   <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
-  <Logging Path "C:\office_deployment\odt_2019\uninstallation.log" />
+  <Logging Level ="Standard" Path="C:\office_deployment\odt_2019\uninstallation.log" />
 </Configuration>

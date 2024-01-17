@@ -1,3 +1,10 @@
+function uninstallPrevious() {
+
+    Start-Process -FilePath "$deployment_tool_path\setup.exe" -ArgumentList "/configure $deployment_tool_path\office-2019-uninstall.xml" -Wait
+    return
+
+}
+
 function configDownload() {
 
     $config_url = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/office-2019/xml-config/configuration.csv"
@@ -8,7 +15,7 @@ function configDownload() {
         Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$deployment_tool_path\configuration.csv"
         Set-Location -Path "$deployment_tool_path"
         Import-Csv -Path "$deployment_tool_path\configuration.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
-        Set-Location -Path "-"
+        Set-Location -Path "$PSScriptRoot"
         Remove-Item -Path "$deployment_tool_path\configuration.csv" -Force
 
     } catch {
@@ -36,6 +43,7 @@ function configDownload() {
 
     Start-Process -FilePath "$deployment_tool_path\$file_name" -ArgumentList "/extract:$deployment_tool_path /quiet /passive /norestart" -Wait
     Remove-Item -Path "$deployment_tool_path\configuration-*.xml", "$deployment_tool_path\$file_name" -Force
+    uninstallPrevious
     return
 
 }
@@ -92,7 +100,7 @@ function installContinue() {
 
     try {
         
-        $continue = Read-Host -Prompt "Do you want to continue? (y/n)" -MaskInput
+        $continue = Read-Host -Prompt "Do you want to continue? (y/n)";Clear-Host
         
         if($continue.Trim() -eq "y") {
 
@@ -128,7 +136,7 @@ function main() {
 
     installContinue
     Write-Host "Finished"
-    
+    Pause
     return
 
 }

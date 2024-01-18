@@ -79,6 +79,9 @@ function serviceHandling() {
     Stop-Process -Name "EXCEL" -Force -ErrorAction SilentlyContinue
     Stop-Process -Name "MSACCESS" -Force -ErrorAction SilentlyContinue
     Stop-Process -Name "MSPUB" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "OUTLOOK" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "WINPROJ" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "VISIO" -Force -ErrorAction SilentlyContinue
 
     return
 

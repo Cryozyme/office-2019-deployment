@@ -91,9 +91,9 @@ function fileHandling() {
 
     try {
         
-        if(-not(Test-Path -Path $deployment_tool_path -PathType Container -ErrorAction SilentlyContinue)) {
+        if(-not(Test-Path -Path $deployment_tool_path -PathType Container)) {
         
-            New-Item -Path "$deployment_tool_path" -ItemType Directory -Force -ErrorAction SilentlyContinue
+            New-Item -Path "$deployment_tool_path" -ItemType Directory -Force
         
         } else {
 
@@ -142,6 +142,8 @@ function optionSelection() {
 
         } elseif($option.Trim() -eq "5") {
 
+            Set-Location -Path "..\"
+            Remove-Item -Path "$(fileHandling)" -Recurse -Force
             Write-Host "Finished"
             Pause
             Exit
@@ -166,7 +168,7 @@ function optionSelection() {
 function main() {
 
     fileHandling | Out-Null
-    Set-Location -Path "$(fileHandling)" -ErrorAction SilentlyContinue | Out-Null
+    Set-Location -Path "$(fileHandling)"
 
     optionSelection
     

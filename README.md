@@ -1,9 +1,6 @@
-# Office Deployment Repo
-Contains a few xml files for office deployment.
-
-## More Batch Files Coming Soon!
+# Office Deployment Repository
+Contains a few xml files for office deployment using Office Deployment Tool (ODT). This repository also contains a script that will uninstall all office versions and install the selected version of your choice.
+**NOTE: This tool does not support Office 2016**
 
 # How To Use:
-1. Download repository and then extract contents.
-2. Navigate inside of the Office folder of your choice and run the .bat file.
-- Note: The script will delete every other office version on your computer!
+You can run the script in multiple ways. You can run it through PowerShell Core (pwsh), PowerShell, Command Prompt (cmd), or just click on the .ps1 file. If you are not using the script, you can download the appropriate .xml file, download the [ODT](https://go.microsoft.com/fwlink/p/?LinkID=626065), extract the odt (just run the file), and run setup.exe /download {myxmlfile.xml} (without the brackets), then run setup.exe /configure {myxmlfile.xml}.

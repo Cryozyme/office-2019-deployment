@@ -21,9 +21,6 @@
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="OneNote" />
     </Product>
-    <Product ID="ProofingTools">
-      <Language ID="es-es" />
-    </Product>
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />
   <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />

@@ -1,6 +1,31 @@
+function installO365() {
+
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O365.xml" -Wait
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O365.xml" -Wait
+    return
+
+}
+
+function installO2021() {
+
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O2021.xml" -Wait
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O2021.xml" -Wait
+    return
+
+}
+
+function installO2019() {
+
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O2019.xml" -Wait
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O2019.xml" -Wait
+    return
+
+}
+
 function uninstallPrevious() {
 
-    Start-Process -FilePath "$deployment_tool_path\setup.exe" -ArgumentList "/configure $deployment_tool_path\uninstall.xml" -Wait
+    
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\uninstall.xml" -Wait
     return
 
 }
@@ -12,10 +37,10 @@ function configDownload() {
     try {
         
         Write-Host "Downloading Configuration Files from $config_url"
-        Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$deployment_tool_path\install.csv"
-        Set-Location -Path "$deployment_tool_path"
-        Import-Csv -Path "$deployment_tool_path\install.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
-        Remove-Item -Path "$deployment_tool_path\install.csv" -Force
+        Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$(fileHandling)\install.csv"
+        Set-Location -Path "$(fileHandling)"
+        Import-Csv -Path "$(fileHandling)\install.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
+        Remove-Item -Path "$(fileHandling)\install.csv" -Force
 
     } catch {
 
@@ -32,48 +57,12 @@ function configDownload() {
         $file_name = "odt.exe"
         
         Write-Host "Downloading Office Deployment Tool from $version"
-        Start-BitsTransfer -Source $version -Destination "$deployment_tool_path\$file_name" -TransferType Download -Priority Foreground
+        Start-BitsTransfer -Source $version -Destination "$(fileHandling)\$file_name" -TransferType Download -Priority Foreground
 
-    } catch {
-        
-        Write-Host "$_"
+    } catch {}
 
-    }
-
-    Start-Process -FilePath "$deployment_tool_path\$file_name" -ArgumentList "/extract:$deployment_tool_path /quiet /passive /norestart" -Wait
-    Remove-Item -Path "$deployment_tool_path\configuration-*.xml", "$deployment_tool_path\$file_name" -Force
-    uninstallPrevious
-    return
-
-}
-
-
-function fileHandling() {
-
-    #Variables
-    $deployment_tool_path = "$env:homedrive\office_deployment\odt"
-
-    try {
-        
-        if(-not(Test-Path -Path $deployment_tool_path -PathType Container)) {
-        
-            New-Item -Path "$deployment_tool_path" -ItemType Directory -Force
-        
-        } else {
-
-            throw "Deployment Path Already Exists"
-            
-        }
-
-    } catch {
-
-        Write-Host "$_"
-    
-    } finally {
-
-        configDownload
-
-    }
+    Start-Process -FilePath "$(fileHandling)\$file_name" -ArgumentList "/extract:$(fileHandling) /quiet /passive /norestart" -Wait
+    Remove-Item -Path "$(fileHandling)\configuration-*.xml", "$(fileHandling)\$file_name" -Force
     
     return
 
@@ -85,30 +74,88 @@ function serviceHandling() {
     sc.exe stop "ClickToRunSvc" | Out-Null
     sc.exe stop "wuauserv" | Out-Null
     sc.exe stop "ose64" | Out-Null
-    Stop-Process -Name "WINWORD" -Force -ErrorAction Continue
-    Stop-Process -Name "POWERPNT" -Force -ErrorAction Continue
-    Stop-Process -Name "EXCEL" -Force -ErrorAction Continue
-    Stop-Process -Name "MSACCESS" -Force -ErrorAction Continue
-    Stop-Process -Name "MSPUB" -Force -ErrorAction Continue
+
+    Stop-Process -Name "WINWORD" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "POWERPNT" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "EXCEL" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "MSACCESS" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "MSPUB" -Force -ErrorAction SilentlyContinue
+
     return
 
 }
 
-function installContinue() {
+function fileHandling() {
 
-    $continue = Read-Host -Prompt "Do you want to continue? (y/n)";Clear-Host
+    $deployment_tool_path = "$env:homedrive\odt"
+
+    try {
         
-    if($continue.Trim() -eq "y") {
+        if(-not(Test-Path -Path $deployment_tool_path -PathType Container -ErrorAction SilentlyContinue)) {
+        
+            New-Item -Path "$deployment_tool_path" -ItemType Directory -Force -ErrorAction SilentlyContinue
+        
+        } else {
 
-        serviceHandling
+            throw "Deployment Path Already Exists"
+            
+        }
 
-    } elseif ($continue.Trim() -eq "n") {
+    } catch {}
+    
+    return $deployment_tool_path
 
-        Exit
+}
 
-    } else {
+function optionSelection() {
 
-        throw "Invalid Response"
+    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall Only`n2:Office 365`n3:Office 2021`n4:Office 2019`n5:Exit`n")"
+
+    try {
+
+        if($option.Trim() -eq "1") {
+
+            serviceHandling
+            configDownload
+            uninstallPrevious
+
+        } elseif($option.Trim() -eq "2") {
+
+            serviceHandling
+            configDownload
+            uninstallPrevious
+            installO365
+
+        } elseif($option.Trim() -eq "3") {
+
+            serviceHandling
+            configDownload
+            uninstallPrevious
+            installO2021
+
+        } elseif($option.Trim() -eq "4") {
+
+            serviceHandling
+            configDownload
+            uninstallPrevious
+            installO2019
+
+        } elseif($option.Trim() -eq "5") {
+
+            Write-Host "Finished"
+            Pause
+            Exit
+
+        } else {
+
+            throw "Invalid Response"
+
+        }
+
+    } catch {
+
+        Clear-Host
+        optionSelection
 
     }
 
@@ -118,45 +165,11 @@ function installContinue() {
 
 function main() {
 
-    Clear-Host
-    Write-Host "---------------------------------------------------------------------"
-    Write-Host "`| THIS SCRIPT WILL INSTALL THE LATEST VERSION OF MICROSOFT OFFICE `|"
-    Write-Host "---------------------------------------------------------------------"
-    Write-Host "`n"
-    Write-Host "---------------------------------------------------------------------------------------------"
-    Write-Host "`| THIS SCRIPT WILL UNINSTALL ALL PREVIOUS CLICK-TO-RUN VERSIONS OF OFFICE ON THE COMPUTER `|"
-    Write-Host "---------------------------------------------------------------------------------------------"
-    Write-Host "`n"
+    fileHandling | Out-Null
+    Set-Location -Path "$(fileHandling)" -ErrorAction SilentlyContinue | Out-Null
 
-    Set-Location -Path "$deployment_tool_path" -ErrorAction Continue
-
-    try {
-
-        installContinue
+    optionSelection
     
-    } catch {
-
-        Write-Host "$_"
-        installContinue
-
-    } try {
-        
-        serviceHandling
-
-    } catch {
-
-        Write-Host "$_"
-
-    } try {
-
-        fileHandling
-
-    } catch {
-
-        Write-Host "$_"
-
-    }
-
     Write-Host "Finished"
     Pause
     return

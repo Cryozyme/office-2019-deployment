@@ -38,7 +38,6 @@ function configDownload() {
         
         Write-Host "Downloading Configuration Files from $config_url"
         Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$(fileHandling)\install.csv"
-        Set-Location -Path "$(fileHandling)"
         Import-Csv -Path "$(fileHandling)\install.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
         Remove-Item -Path "$(fileHandling)\install.csv" -Force
 

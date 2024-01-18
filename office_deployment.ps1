@@ -104,8 +104,7 @@ function installContinue() {
 
     } elseif ($continue.Trim() -eq "n") {
 
-        Exit-PSHostProcess
-        Exit-PSSession
+        Exit
 
     } else {
 

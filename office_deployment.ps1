@@ -111,7 +111,9 @@ function fileHandling() {
 
 function optionSelection() {
 
-    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall Only`n2:Office 365`n3:Office 2021`n4:Office 2019`n5:Exit`n")"
+    Clear-Host
+
+    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall All`n2:Install Office 365`n3:Install Office 2021`n4:Install Office 2019`n5:Exit`n")"
 
     try {
 
@@ -120,6 +122,7 @@ function optionSelection() {
             serviceHandling
             configDownload
             uninstallPrevious
+            optionSelection
 
         } elseif($option.Trim() -eq "2") {
 
@@ -127,6 +130,7 @@ function optionSelection() {
             configDownload
             uninstallPrevious
             installO365
+            optionSelection
 
         } elseif($option.Trim() -eq "3") {
 
@@ -134,6 +138,7 @@ function optionSelection() {
             configDownload
             uninstallPrevious
             installO2021
+            optionSelection
 
         } elseif($option.Trim() -eq "4") {
 
@@ -141,13 +146,13 @@ function optionSelection() {
             configDownload
             uninstallPrevious
             installO2019
+            optionSelection
 
         } elseif($option.Trim() -eq "5") {
 
             Set-Location -Path "..\"
             Remove-Item -Path "$(fileHandling)" -Recurse -Force
             Write-Host "Finished"
-            Pause
             Exit
 
         } else {
@@ -158,7 +163,6 @@ function optionSelection() {
 
     } catch {
 
-        Clear-Host
         optionSelection
 
     }
@@ -173,9 +177,6 @@ function main() {
     Set-Location -Path "$(fileHandling)"
 
     optionSelection
-    
-    Write-Host "Finished"
-    Pause
     return
 
 }

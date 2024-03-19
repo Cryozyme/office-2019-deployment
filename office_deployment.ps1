@@ -98,6 +98,11 @@ function serviceHandling() {
 function fileHandling() {
 
     $deployment_tool_path = "$env:homedrive\odt"
+    $logging_path_uninstall = "C:\office_deployment\odt_uninstall"
+    $logging_path_365 = "C:\office_deployment\odt_365"
+    $logging_path_2021 = "C:\office_deployment\odt_2021"
+    $logging_path_2019 = "C:\office_deployment\odt_2019"
+    $logging_path_2016 = "C:\office_deployment\odt_2016"
 
     try {
         
@@ -112,7 +117,77 @@ function fileHandling() {
         }
 
     } catch {}
+
+    try {
+
+        if(-not(Test-Path -Path $logging_path_uninstall -PathType Container)) {
+
+            New-Item -Path "$logging_path_uninstall" -ItemType Directory -Force
+
+        } else {
+
+            throw "Uninstall Log Path Already Exists"
+
+        }
+
+    } catch {}
     
+    try {
+
+        if(-not(Test-Path -Path $logging_path_365 -PathType Container)) {
+
+            New-Item -Path "$logging_path_365" -ItemType Directory -Force
+
+        } else {
+
+            throw "Uninstall Log Path Already Exists"
+
+        }
+
+    } catch {}
+
+    try {
+
+        if(-not(Test-Path -Path $logging_path_2021 -PathType Container)) {
+
+            New-Item -Path "$logging_path_2021" -ItemType Directory -Force
+
+        } else {
+
+            throw "Uninstall Log Path Already Exists"
+
+        }
+
+    } catch {}
+
+    try {
+
+        if(-not(Test-Path -Path $logging_path_2019 -PathType Container)) {
+
+            New-Item -Path "$logging_path_2019" -ItemType Directory -Force
+
+        } else {
+
+            throw "Uninstall Log Path Already Exists"
+
+        }
+
+    } catch {}
+
+    try {
+
+        if(-not(Test-Path -Path $logging_path_2016 -PathType Container)) {
+
+            New-Item -Path "$logging_path_2016" -ItemType Directory -Force
+
+        } else {
+
+            throw "Uninstall Log Path Already Exists"
+
+        }
+
+    } catch {}
+
     return $deployment_tool_path
 
 }

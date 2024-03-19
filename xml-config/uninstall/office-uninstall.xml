@@ -1,5 +1,6 @@
 <Configuration>
   <Remove All="TRUE">
+    <Product ID="ProPlusRetail"></Product>
     <Product ID="O365ProPlusEEANoTeamsRetail"></Product>
     <Product ID="O365ProPlusRetail"></Product>
     <Product ID="O365BusinessEEANoTeamsRetail"></Product>

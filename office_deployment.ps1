@@ -22,6 +22,14 @@ function installO2019() {
 
 }
 
+function installO2016() {
+
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O2016.xml" -Wait
+    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O2016.xml" -Wait
+    return
+
+}
+
 function uninstallPrevious() {
 
     
@@ -113,7 +121,7 @@ function optionSelection() {
 
     Clear-Host
 
-    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall All`n2:Install Office 365`n3:Install Office 2021`n4:Install Office 2019`n5:Exit`n")"
+    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall All`n2:Install Office 365`n3:Install Office 2021`n4:Install Office 2019`n5:Install Office 2016`n6:Exit`n")"
 
     try {
 
@@ -149,6 +157,14 @@ function optionSelection() {
             optionSelection
 
         } elseif($option.Trim() -eq "5") {
+
+            serviceHandling
+            configDownload
+            uninstallPrevious
+            installO2016
+            optionSelection
+
+        } elseif($option.Trim() -eq "6") {
 
             Set-Location -Path "..\"
             Remove-Item -Path "$(fileHandling)" -Recurse -Force

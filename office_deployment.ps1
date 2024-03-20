@@ -74,7 +74,7 @@ function configDownload() {
 
     Start-Process -FilePath "$(fileHandling)\$file_name" -ArgumentList "/extract:$(fileHandling) /quiet /passive /norestart" -Wait
     Remove-Item -Path "$(fileHandling)\configuration-*.xml", "$(fileHandling)\$file_name" -Force
-    Expand-Archive -Path "$(fileHandling)\sara.zip" -DestinationPath "$(fileHandling)\"
+    Expand-Archive -Path "$(fileHandling)\sara.zip" -DestinationPath "$(fileHandling)\" -Force
     
     return
 
@@ -135,7 +135,7 @@ function fileHandling() {
 
         } else {
 
-            throw "Uninstall Log Path Already Exists"
+            throw "Uninstall Logging Path Already Exists"
 
         }
 
@@ -153,7 +153,7 @@ function fileHandling() {
 
         } else {
 
-            throw "Uninstall Log Path Already Exists"
+            throw "Office 365 Logging Path Already Exists"
 
         }
 
@@ -171,7 +171,7 @@ function fileHandling() {
 
         } else {
 
-            throw "Uninstall Log Path Already Exists"
+            throw "Office 2021 Logging Path Already Exists"
 
         }
 
@@ -189,7 +189,7 @@ function fileHandling() {
 
         } else {
 
-            throw "Uninstall Log Path Already Exists"
+            throw "Office 2019 Logging Path Already Exists"
 
         }
 
@@ -207,7 +207,7 @@ function fileHandling() {
 
         } else {
 
-            throw "Uninstall Log Path Already Exists"
+            throw "Office 2016 Logging Path Already Exists"
 
         }
 

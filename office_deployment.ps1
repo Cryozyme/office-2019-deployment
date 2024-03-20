@@ -33,7 +33,8 @@ function installO2016() {
 function uninstallPrevious() {
 
     
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\uninstall.xml" -Wait
+    Expand-Archive -Path "$(fileHandling)\sara.zip" -DestinationPath "$(fileHandling)\"
+    Start-Process -FilePath "$(fileHandling)\SaRaCMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
     return
 
 }

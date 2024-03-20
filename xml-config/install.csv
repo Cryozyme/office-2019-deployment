@@ -2,5 +2,6 @@ Source, Destination
 "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-365/office-365.xml", ".\O365.xml"
 "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2019/office-2019.xml", ".\O2019.xml"
 "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2021/office-2021.xml", ".\O2021.xml"
-"https://download.microsoft.com/download/5/0/d/50dd45c9-f465-402e-92d2-537871f1f106/SaRACmd_17_01_1440_0.zip", ".\sara.zip"
 "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2016/office-2016.xml", ".\O2016.xml"
+"https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/uninstall/office-uninstall.xml", ".\uninstall.xml"
+"https://download.microsoft.com/download/5/0/d/50dd45c9-f465-402e-92d2-537871f1f106/SaRACmd_17_01_1440_0.zip", ".\sara.zip"

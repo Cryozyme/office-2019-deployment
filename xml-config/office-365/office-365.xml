@@ -2,7 +2,6 @@
   <Add OfficeClientEdition="64" Channel="SemiAnnualPreview" MigrateArch="TRUE">
     <Product ID="O365ProPlusRetail">
       <Language ID="en-us" />
-      <Language ID="es-es" />
       <ExcludeApp ID="Groove" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
@@ -14,7 +13,6 @@
     </Product>
     <Product ID="VisioProRetail">
       <Language ID="en-us" />
-      <Language ID="es-es" />
       <ExcludeApp ID="Groove" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
@@ -26,7 +24,6 @@
     </Product>
     <Product ID="ProjectProRetail">
       <Language ID="en-us" />
-      <Language ID="es-es" />
       <ExcludeApp ID="Groove" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="OneDrive" />
@@ -38,12 +35,8 @@
     </Product>
     <Product ID="AccessRuntimeRetail">
       <Language ID="en-us" />
-      <Language ID="es-es" />
       <ExcludeApp ID="Bing" />
       <ExcludeApp ID="OneNote" />
-    </Product>
-    <Product ID="ProofingTools">
-      <Language ID="es-es" />
     </Product>
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />

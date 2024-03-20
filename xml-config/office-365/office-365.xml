@@ -1,42 +1,37 @@
 <Configuration ID="f6861acd-b06a-433b-9c76-5bd3d0cd8e66">
   <Add OfficeClientEdition="64" Channel="SemiAnnualPreview" MigrateArch="TRUE">
     <Product ID="O365ProPlusRetail">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
-      <ExcludeApp ID="Bing" />
-      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
       <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="VisioProRetail">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
-      <ExcludeApp ID="Bing" />
-      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
       <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="ProjectProRetail">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
       <ExcludeApp ID="Bing" />
-      <ExcludeApp ID="Bing" />
-      <ExcludeApp ID="Bing" />
-    </Product>
-    <Product ID="AccessRuntimeRetail">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Bing" />
-      <ExcludeApp ID="OneNote" />
     </Product>
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />

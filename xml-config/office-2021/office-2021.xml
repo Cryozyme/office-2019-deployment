@@ -1,28 +1,37 @@
 <Configuration ID="75ca0098-e7d5-4f04-b43c-ddcddd940fa9">
   <Add OfficeClientEdition="64" Channel="PerpetualVL2021" MigrateArch="TRUE">
     <Product ID="ProPlus2021Volume" PIDKEY="FXYTK-NJJ8C-GB6DW-3DYQT-6F7TH">
-      <Language ID="en-us" />
-      <Language ID="es-es" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="VisioPro2021Volume" PIDKEY="KNH8D-FGHT4-T8RK3-CTDYJ-K2HT4">
-      <Language ID="en-us" />
-      <Language ID="es-es" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="ProjectPro2021Volume" PIDKEY="FTNWT-C6WBT-8HMGF-K9PRX-QV9H8">
-      <Language ID="en-us" />
-      <Language ID="es-es" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
       <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />

@@ -1,25 +1,37 @@
 <Configuration ID="a7ad2d72-1311-4878-89e0-79be3287dcac">
   <Add OfficeClientEdition="64" Channel="PerpetualVL2019">
     <Product ID="ProPlus2019Volume" PIDKEY="NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="VisioPro2019Volume" PIDKEY="9BGNQ-K37YR-RQHF2-38RQ3-7VCBB">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="ProjectPro2019Volume" PIDKEY="B4NPR-3FKK7-T2MBV-FRQ4W-PKD2B">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />

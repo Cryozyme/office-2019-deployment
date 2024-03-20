@@ -1,32 +1,37 @@
 <Configuration>
   <Add OfficeClientEdition="64">
     <Product ID="ProPlusRetail">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
-      <ExcludeApp ID="Access" />
-      <ExcludeApp ID="InfoPath" />
-      <ExcludeApp ID="Outlook" />
-      <ExcludeApp ID="Publisher" />
-      <ExcludeApp ID="SharePointDesigner" />
       <ExcludeApp ID="Skype" />
       <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="VisioProRetail">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
     <Product ID="ProjectProRetail">
-      <Language ID="en-us" />
-      <ExcludeApp ID="Groove" />
+      <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Groove" />
       <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="Teams" />
       <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Skype" />
+      <ExcludeApp ID="Skypeforbusiness" />
+      <ExcludeApp ID="Bing" />
     </Product>
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />

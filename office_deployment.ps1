@@ -32,8 +32,6 @@ function installO2016() {
 
 function uninstallPrevious() {
 
-    
-    Expand-Archive -Path "$(fileHandling)\sara.zip" -DestinationPath "$(fileHandling)\"
     Start-Process -FilePath "$(fileHandling)\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
     return
 
@@ -49,6 +47,7 @@ function configDownload() {
         Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$(fileHandling)\install.csv"
         Import-Csv -Path "$(fileHandling)\install.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
         Remove-Item -Path "$(fileHandling)\install.csv" -Force
+
 
     } catch {
 
@@ -67,10 +66,15 @@ function configDownload() {
         Write-Host "Downloading Office Deployment Tool from $version"
         Start-BitsTransfer -Source $version -Destination "$(fileHandling)\$file_name" -TransferType Download -Priority Foreground
 
-    } catch {}
+    } catch {
+
+        Write-Host "$_"
+
+    }
 
     Start-Process -FilePath "$(fileHandling)\$file_name" -ArgumentList "/extract:$(fileHandling) /quiet /passive /norestart" -Wait
     Remove-Item -Path "$(fileHandling)\configuration-*.xml", "$(fileHandling)\$file_name" -Force
+    Expand-Archive -Path "$(fileHandling)\sara.zip" -DestinationPath "$(fileHandling)\"
     
     return
 
@@ -117,7 +121,11 @@ function fileHandling() {
             
         }
 
-    } catch {}
+    } catch {
+
+        Write-Host "$_"
+
+    }
 
     try {
 
@@ -131,7 +139,11 @@ function fileHandling() {
 
         }
 
-    } catch {}
+    } catch {
+
+        Write-Host "$_"
+
+    }
     
     try {
 
@@ -145,7 +157,11 @@ function fileHandling() {
 
         }
 
-    } catch {}
+    } catch {
+
+        Write-Host "$_"
+
+    }
 
     try {
 
@@ -159,7 +175,11 @@ function fileHandling() {
 
         }
 
-    } catch {}
+    } catch {
+
+        Write-Host "$_"
+
+    }
 
     try {
 
@@ -173,7 +193,11 @@ function fileHandling() {
 
         }
 
-    } catch {}
+    } catch {
+
+        Write-Host "$_"
+
+    }
 
     try {
 
@@ -187,7 +211,11 @@ function fileHandling() {
 
         }
 
-    } catch {}
+    } catch {
+
+        Write-Host "$_"
+
+    }
 
     return $deployment_tool_path
 

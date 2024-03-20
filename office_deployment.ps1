@@ -34,7 +34,7 @@ function uninstallPrevious() {
 
     
     Expand-Archive -Path "$(fileHandling)\sara.zip" -DestinationPath "$(fileHandling)\"
-    Start-Process -FilePath "$(fileHandling)\SaRaCMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
+    Start-Process -FilePath "$(fileHandling)\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
     return
 
 }

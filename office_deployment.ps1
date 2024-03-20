@@ -1,38 +1,38 @@
 function installO365() {
 
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O365.xml" -Wait
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O365.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O365.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O365.xml" -Wait
     return
 
 }
 
 function installO2021() {
 
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O2021.xml" -Wait
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O2021.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O2021.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O2021.xml" -Wait
     return
 
 }
 
 function installO2019() {
 
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O2019.xml" -Wait
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O2019.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O2019.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O2019.xml" -Wait
     return
 
 }
 
 function installO2016() {
 
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/download $(fileHandling)\O2016.xml" -Wait
-    Start-Process -FilePath "$(fileHandling)\setup.exe" -ArgumentList "/configure $(fileHandling)\O2016.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O2016.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O2016.xml" -Wait
     return
 
 }
 
 function uninstallPrevious() {
 
-    Start-Process -FilePath "$(fileHandling)\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
     return
 
 }
@@ -44,9 +44,9 @@ function configDownload() {
     try {
         
         Write-Host "Downloading Configuration Files from $config_url"
-        Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$(fileHandling)\install.csv"
-        Import-Csv -Path "$(fileHandling)\install.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
-        Remove-Item -Path "$(fileHandling)\install.csv" -Force
+        Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$env:homedrive\odt\install.csv"
+        Import-Csv -Path "$env:homedrive\odt\install.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
+        Remove-Item -Path "$env:homedrive\odt\install.csv" -Force
 
 
     } catch {
@@ -64,7 +64,7 @@ function configDownload() {
         $file_name = "odt.exe"
         
         Write-Host "Downloading Office Deployment Tool from $version"
-        Start-BitsTransfer -Source $version -Destination "$(fileHandling)\$file_name" -TransferType Download -Priority Foreground
+        Start-BitsTransfer -Source $version -Destination "$env:homedrive\odt\$file_name" -TransferType Download -Priority Foreground
 
     } catch {
 
@@ -72,9 +72,9 @@ function configDownload() {
 
     }
 
-    Start-Process -FilePath "$(fileHandling)\$file_name" -ArgumentList "/extract:$(fileHandling) /quiet /passive /norestart" -Wait
-    Remove-Item -Path "$(fileHandling)\configuration-*.xml", "$(fileHandling)\$file_name" -Force
-    Expand-Archive -Path "$(fileHandling)\sara.zip" -DestinationPath "$(fileHandling)\" -Force
+    Start-Process -FilePath "$env:homedrive\odt\$file_name" -ArgumentList "/extract:$env:homedrive\odt /quiet /passive /norestart" -Wait
+    Remove-Item -Path "$env:homedrive\odt\configuration-*.xml", "$env:homedrive\odt\$file_name" -Force
+    Expand-Archive -Path "$env:homedrive\odt\sara.zip" -DestinationPath "$env:homedrive\odt\" -Force
     
     return
 
@@ -217,7 +217,7 @@ function fileHandling() {
 
     }
 
-    return $deployment_tool_path
+    return
 
 }
 
@@ -271,7 +271,7 @@ function optionSelection() {
         } elseif($option.Trim() -eq "6") {
 
             Set-Location -Path "..\"
-            Remove-Item -Path "$(fileHandling)" -Recurse -Force
+            Remove-Item -Path "$env:homedrive\odt" -Recurse -Force
             Write-Host "Finished"
             Exit
 
@@ -294,7 +294,7 @@ function optionSelection() {
 function main() {
 
     fileHandling | Out-Null
-    Set-Location -Path "$(fileHandling)"
+    Set-Location -Path "$env:homedrive\odt"
 
     optionSelection
     return

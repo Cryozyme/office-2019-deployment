@@ -272,6 +272,7 @@ function optionSelection() {
 
             Set-Location -Path "..\"
             Remove-Item -Path "$env:homedrive\odt" -Recurse -Force
+            Remove-Item -Path "$env:homedrive\office_deployment" -Recurse -Force
             Write-Host "Finished"
             Exit
 

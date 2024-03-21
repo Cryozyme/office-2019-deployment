@@ -1,31 +1,31 @@
 function installO365() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o365"" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o365"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o365" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o365" -Wait
     return
 
 }
 
 function installO2021() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o2021"" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2021"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2021" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2021" -Wait
     return
 
 }
 
 function installO2019() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o2019"" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2019"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2019" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2019" -Wait
     return
 
 }
 
 function installO2016() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o2016"" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2016"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2016" -Wait
     return
 
 }

@@ -1,31 +1,95 @@
 function installO365() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o365" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o365" -Wait
+    for($i=0;$i -le 4;$i++) {
+
+        try {
+            
+            $o365_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o365_modified" -PassThru -Wait
+
+            if($o365_download.ExitCode -eq 0) {
+
+                return
+
+            } else {
+
+                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION."
+
+            }
+
+        } catch {
+
+            if($i -eq 4) {
+            
+                Write-Host "$_"
+
+            } else {
+
+                continue
+
+            }
+
+        } finally {
+
+            if($i -eq 4) {
+
+                Pause
+                optionSelection
+
+            }
+
+        }
+
+    }
+
+    try {
+
+        $o365_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o365_modified" -PassThru -Wait
+
+        if($o365_install.ExitCode -eq 0) {
+
+            return
+
+        } else {
+
+            throw "Office Deployment Toolkit Could Not Install Microsoft Office"
+
+        }
+        
+    } catch {
+
+        Write-Host "$_"
+
+    } finally {
+
+        Pause
+        optionSelection
+
+    }
+    
     return
 
 }
 
 function installO2021() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2021" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2021" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2021_modified" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2021_modified" -Wait
     return
 
 }
 
 function installO2019() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2019" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2019" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2019_modified" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2019_modified" -Wait
     return
 
 }
 
 function installO2016() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016_modified" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016_modified" -Wait
     return
 
 }
@@ -79,22 +143,6 @@ function uninstallPrevious() {
 
 function configDownload() {
 
-    <#$config_url = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/install.csv"
-
-    try {
-        
-        Write-Host "Downloading Configuration Files from $config_url"
-        Invoke-WebRequest -UseBasicParsing "$config_url" -OutFile "$env:homedrive\odt\install.csv"
-        Import-Csv -Path "$env:homedrive\odt\install.csv" -Delimiter "," | Start-BitsTransfer -TransferType Download -Priority Foreground
-        Remove-Item -Path "$env:homedrive\odt\install.csv" -Force
-
-
-    } catch {
-
-        Write-Host "$_"
-
-    }#>
-    
     try {
         
         $app_id = 49117
@@ -277,7 +325,7 @@ function optionSelection() {
 
     Clear-Host
 
-    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall All`n2:Install Office 365`n3:Install Office 2021`n4:Install Office 2019`n5:Install Office 2016`n6:Exit`n")"
+    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall Office`n2:Install Office 365`n3:Install Office 2021`n4:Install Office 2019`n5:Install Office 2016`n6:Exit`n")"
 
     try {
 
@@ -338,6 +386,10 @@ function optionSelection() {
 
         optionSelection
 
+    } finally {
+
+        optionSelection
+
     }
 
     return
@@ -354,10 +406,19 @@ function main() {
 
 }
 
-#Config Links
-$o365 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-365/office-365.xml"
-$o2021 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2021/office-2021.xml"
-$o2019 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2019/office-2019.xml"
-$o2016 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2016/office-2016.xml"
+#Annoying Apps Removed Config Links
+$o365_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-365/office-365-modified.xml"
+$o2021_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2021/office-2021-modified.xml"
+$o2019_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2019/office-2019-modified.xml"
+$o2016_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2016/office-2016-modified.xml"
+
+<#Full Installation Config Links
+$o365_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-365/office-365-full.xml"
+$o2021_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2021/office-2021-full.xml"
+$o2019_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2019/office-2019-full.xml"
+$o2016_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2016/office-2016-full.xml"#>
+
+#Uninstall Config Link
 $uninstall = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/uninstall/office-uninstall.xml"
+
 main

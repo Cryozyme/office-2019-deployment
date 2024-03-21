@@ -34,11 +34,42 @@ function uninstallPrevious() {
 
     try {
 
-        Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $uninstall" -Wait
+        $odt_office_scrub = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $uninstall" -PassThru -Wait
+
+        if($odt_office_scrub.ExitCode -eq 0) {
+
+            return
+
+        } else {
+            
+            throw "Office Deployment Toolkit Could Not Uninstall Office"            
+
+        }
 
     } catch {
 
-        Start-Process -FilePath "$env:homedrive\odt\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
+        Write-Host "$_"
+
+        try {
+
+            $office_scrub = Start-Process -FilePath "$env:homedrive\odt\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -PassThru -Wait
+            
+            if($office_scrub.ExitCode -eq 0) {
+
+                return
+    
+            } else {
+                
+                throw "SaRACMD Could Not Uninstall Office"            
+    
+            }
+
+        } catch {
+            
+            Write-Host "$_"
+            return
+
+        }
     
     }
     

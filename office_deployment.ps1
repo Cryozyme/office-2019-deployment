@@ -86,8 +86,8 @@ function configDownload() {
         $saracmd_version = "https://download.microsoft.com/download/5/0/d/50dd45c9-f465-402e-92d2-537871f1f106/SaRACmd_17_01_1440_0.zip"
         $saracmd_filename = "sara.zip"
         
-        Write-Host "Downloading Office Deployment Tool from $saracmd_version"
-        Start-BitsTransfer -Source $version -Destination "$env:homedrive\odt\$saracmd_filename" -TransferType Download -Priority Foreground
+        Write-Host "SaRACMD from $saracmd_version"
+        Start-BitsTransfer -Source $saracmd_version -Destination "$env:homedrive\odt\$saracmd_filename" -TransferType Download -Priority Foreground
 
     } catch {
         

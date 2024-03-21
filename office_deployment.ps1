@@ -71,7 +71,7 @@ function configDownload() {
         Write-Host "$_"
 
     }
-
+    
     Start-Process -FilePath "$env:homedrive\odt\$file_name" -ArgumentList "/extract:$env:homedrive\odt /quiet /passive /norestart" -Wait
     Remove-Item -Path "$env:homedrive\odt\configuration-*.xml", "$env:homedrive\odt\$file_name" -Force
     Expand-Archive -Path "$env:homedrive\odt\sara.zip" -DestinationPath "$env:homedrive\odt\" -Force

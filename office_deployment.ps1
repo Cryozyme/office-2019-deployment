@@ -81,6 +81,17 @@ function configDownload() {
 
         Write-Host "$_"
 
+    } try {
+
+        $version = "https://download.microsoft.com/download/5/0/d/50dd45c9-f465-402e-92d2-537871f1f106/SaRACmd_17_01_1440_0.zip"
+        
+        Write-Host "Downloading Office Deployment Tool from $version"
+        Start-BitsTransfer -Source $version -Destination "$env:homedrive\odt\$file_name" -TransferType Download -Priority Foreground
+
+    } catch {
+        
+        Write-Host "$_"
+
     }
     
     Start-Process -FilePath "$env:homedrive\odt\$file_name" -ArgumentList "/extract:$env:homedrive\odt /quiet /passive /norestart" -Wait

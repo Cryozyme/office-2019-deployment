@@ -1,45 +1,54 @@
 function installO365() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O365.xml" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O365.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o365"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o365"" -Wait
     return
 
 }
 
 function installO2021() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O2021.xml" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O2021.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o2021"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2021"" -Wait
     return
 
 }
 
 function installO2019() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O2019.xml" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O2019.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o2019"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2019"" -Wait
     return
 
 }
 
 function installO2016() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $env:homedrive\odt\O2016.xml" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $env:homedrive\odt\O2016.xml" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download "$o2016"" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2016"" -Wait
     return
 
 }
 
 function uninstallPrevious() {
 
-    Start-Process -FilePath "$env:homedrive\odt\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
+    try {
+
+        Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $uninstall" -Wait
+
+    } catch {
+
+        Start-Process -FilePath "$env:homedrive\odt\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -Wait
+    
+    }
+    
     return
 
 }
 
 function configDownload() {
 
-    $config_url = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/install.csv"
+    <#$config_url = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/install.csv"
 
     try {
         
@@ -53,7 +62,9 @@ function configDownload() {
 
         Write-Host "$_"
 
-    } try {
+    }#>
+    
+    try {
         
         $app_id = 49117
         $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
@@ -82,9 +93,7 @@ function configDownload() {
 
 function serviceHandling() {
 
-    sc.exe stop "BITS" | Out-Null
     sc.exe stop "ClickToRunSvc" | Out-Null
-    sc.exe stop "wuauserv" | Out-Null
     sc.exe stop "ose64" | Out-Null
 
     Stop-Process -Name "WINWORD" -Force -ErrorAction SilentlyContinue
@@ -302,4 +311,10 @@ function main() {
 
 }
 
+#Config Links
+$o365 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-365/office-365.xml"
+$o2021 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2021/office-2021.xml"
+$o2019 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2019/office-2019.xml"
+$o2016 = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2016/office-2016.xml"
+$uninstall = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/uninstall/office-uninstall.xml"
 main

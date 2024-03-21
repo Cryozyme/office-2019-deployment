@@ -87,7 +87,7 @@
     <Product ID="SkypeforBusinessEntry2019Retail"></Product>
     <Product ID="SkypeforBusiness2021Volume"></Product>
   </Remove>
-  <Display Level="Full" AcceptEULA="TRUE" />
+  <Display Level="None" AcceptEULA="TRUE" />
   <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
   <Logging Level="Standard" Path="C:\office_deployment\odt_uninstall\uninstallation.log" />
 </Configuration>

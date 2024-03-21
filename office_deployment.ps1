@@ -25,7 +25,7 @@ function installO2019() {
 function installO2016() {
 
     Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure "$o2016" -Wait
+    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016" -Wait
     return
 
 }

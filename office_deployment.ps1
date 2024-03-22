@@ -124,6 +124,8 @@ function installO2021() {
 
 function installO2019() {
 
+    Write-Host "Downloading Office 2019..."
+
     for($i=0;$i -le 4;$i++) {
         
         try {
@@ -155,6 +157,8 @@ function installO2019() {
         }
 
     }
+
+    Write-Host "Installing Office 2019..."
 
     try {
         

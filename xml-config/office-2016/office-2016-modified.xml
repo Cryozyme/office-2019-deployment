@@ -1,6 +1,6 @@
 <Configuration>
   <Add OfficeClientEdition="64">
-    <Product ID="ProPlusRetail">
+    <Product ID="ProPlusVolume">
       <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="Groove" />
@@ -11,7 +11,7 @@
       <ExcludeApp ID="Skypeforbusiness" />
       <ExcludeApp ID="Bing" />
     </Product>
-    <Product ID="VisioProRetail">
+    <!--Product ID="VisioProRetail">
       <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="Groove" />
@@ -32,7 +32,7 @@
       <ExcludeApp ID="Skype" />
       <ExcludeApp ID="Skypeforbusiness" />
       <ExcludeApp ID="Bing" />
-    </Product>
+    </Product-->
   </Add>
   <Property Name="SharedComputerLicensing" Value="0" />
   <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />

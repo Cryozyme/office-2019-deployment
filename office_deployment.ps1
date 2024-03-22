@@ -1,5 +1,7 @@
 function installO365() {
 
+    Write-Host "Downloading Office 365"
+
     for($i=0;$i -le 4;$i++) {
 
         try {
@@ -28,18 +30,11 @@ function installO365() {
 
             }
 
-        } finally {
-
-            if($i -eq 4) {
-
-                Pause
-                optionSelection
-
-            }
-
         }
 
     }
+
+    Write-Host "Installing Office 365"
 
     try {
 
@@ -59,10 +54,67 @@ function installO365() {
 
         Write-Host "$_"
 
-    } finally {
+    }
 
-        Pause
-        optionSelection
+    return
+
+}
+
+function installO2021() {
+
+    Write-Host "Downloading Office 2021..."
+
+    for($i=0;$i -le 4;$i++) {
+
+        try {
+            
+            $o2021_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2021_modified" -PassThru -Wait
+            
+            if($o2021_download.ExitCode -eq 0) {
+
+                return
+
+            } else {
+
+                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION."
+
+            }
+
+        } catch {
+
+            if($i -eq 4) {
+            
+                Write-Host "$_"
+
+            } else {
+
+                continue
+
+            }
+
+        }
+
+    }
+
+    Write-Host "Installing Office 2021..."
+
+    try {
+        
+        $o2021_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2021_modified" -PassThru -Wait
+
+        if($o2021_install.ExitCode -eq 0) {
+
+            return
+
+        } else {
+
+            throw "Office Deployment Toolkit Could Not Install Microsoft Office"
+
+        }
+
+    } catch {
+        
+        Write-Host "$_"
 
     }
     
@@ -70,26 +122,68 @@ function installO365() {
 
 }
 
-function installO2021() {
-
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2021_modified" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2021_modified" -Wait
-    return
-
-}
-
 function installO2019() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2019_modified" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2019_modified" -Wait
+    for($i=0;$i -le 4;$i++) {
+        
+        try {
+
+            $o2019_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2019_modified" -PassThru -Wait
+
+            if($o2019_download.ExitCode -eq 0) {
+                
+                return
+            
+            } else {
+                
+                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION."
+            
+            }
+            
+        } catch {
+            
+            if($i -eq 4) {
+            
+                Write-Host "$_"
+
+            } else {
+
+                continue
+
+            }
+
+        }
+
+    }
+
+    try {
+        
+        $o2019_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2019_modified" -PassThru -Wait
+
+        if($o2019_install.ExitCode -eq 0) {
+            
+            return
+        
+        } else {
+            
+            throw "Office Deployment Toolkit Could Not Install Microsoft Office"
+        
+        }
+
+    } catch {
+        
+        Write-Host "$_"
+
+    }
+    
     return
 
 }
 
 function installO2016() {
 
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016_modified" -Wait
-    Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016_modified" -Wait
+    $o2016_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016_modified" -PassThru -Wait
+    $o2016_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016_modified" -PassThru -Wait
     return
 
 }
@@ -131,7 +225,6 @@ function uninstallPrevious() {
         } catch {
             
             Write-Host "$_"
-            return
 
         }
     
@@ -395,10 +488,10 @@ function optionSelection() {
 
 function main() {
 
-    fileHandling | Out-Null
+    fileHandling
     Set-Location -Path "$env:homedrive\odt"
-
     optionSelection
+
     return
 
 }

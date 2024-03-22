@@ -14,7 +14,7 @@ function installO365() {
 
             } else {
 
-                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION."
+                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION"
 
             }
 
@@ -76,7 +76,7 @@ function installO2021() {
 
             } else {
 
-                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION."
+                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION"
 
             }
 
@@ -138,7 +138,7 @@ function installO2019() {
             
             } else {
                 
-                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION."
+                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION"
             
             }
             
@@ -186,8 +186,62 @@ function installO2019() {
 
 function installO2016() {
 
-    $o2016_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016_modified" -PassThru -Wait
-    $o2016_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016_modified" -PassThru -Wait
+    Write-Host "Downloading Office 2016..."
+
+    for($i=0;$i -le 4;$i++) {
+        
+        try {
+
+            $o2016_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016_modified" -PassThru -Wait
+
+            if($o2016_download.ExitCode -eq 0) {
+                
+                return
+            
+            } else {
+                
+                throw "Office Deployment Toolkit Could Not Download Microsoft Office`nCHECK YOUR INTERNET CONNECTION"
+            
+            }
+        
+        } catch {
+        
+            if($i -eq 4) {
+
+                Write-Host "$_"
+
+            } else {
+
+                continue
+
+            }
+
+        }
+
+    }
+
+    Write-Host "Installing Office 2016..."
+
+    try {
+        
+        $o2016_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016_modified" -PassThru -Wait
+
+        if($o2016_install.ExitCode -eq 0) {
+            
+            return
+        
+        } else {
+
+            throw "Office Deployment Toolkit Could Not Install Microsoft Office"
+
+        }
+
+    } catch {
+
+        Write-Host "$_"
+
+    }
+    
     return
 
 }

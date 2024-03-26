@@ -1,4 +1,4 @@
-# Office Deployment Repository
+# Automated Office Deployment Script Repository
 Contains a few xml files for office deployment using Office Deployment Tool (ODT). This repository also contains a script that will uninstall all office versions and install the selected version of your choice.
 **NOTE: This tool does not support the MSI version of Office 2016**
 

@@ -1,6 +1,6 @@
 <Configuration>
   <Add OfficeClientEdition="64">
-    <Product ID="ProPlusVolume">
+    <Product ID="ProPlusRetail">
       <Language ID="MatchOS" />
       <ExcludeApp ID="Lync" />
       <ExcludeApp ID="Groove" />

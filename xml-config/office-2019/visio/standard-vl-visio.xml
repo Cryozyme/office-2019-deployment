@@ -1,0 +1,17 @@
+<Configuration ID="c57b497d-a0ac-4ba0-a140-9e262e662831">
+  <Add OfficeClientEdition="64" Channel="Current">
+    <Product ID="VisioStd2019Volume" PIDKEY="7TQNQ-K3YQQ-3PFH7-CCPPM-X4VQ2">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="OneDrive" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Property Name="AUTOACTIVATE" Value="1" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

@@ -1,0 +1,16 @@
+<Configuration ID="e6aa5cd9-6834-4d29-ba17-c4a9d6403da8">
+  <Info Description="" />
+  <Add OfficeClientEdition="64" Channel="Current">
+    <Product ID="ProjectProXVolume" PIDKEY="WGT24-HCNMF-FQ7XH-6M8K7-DRTW9">
+      <Language ID="MatchOS" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Property Name="AUTOACTIVATE" Value="1" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

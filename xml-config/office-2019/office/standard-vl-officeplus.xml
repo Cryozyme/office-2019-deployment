@@ -1,0 +1,28 @@
+<Configuration ID="5b8cdb82-69e4-43b4-83d4-67bab70550fc">
+  <Info Description="" />
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2019">
+    <Product ID="Standard2019Volume" PIDKEY="6NWWJ-YQWMR-QKGCB-6TMB3-9D9HK">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+    </Product>
+    <Product ID="SkypeforBusinessEntry2019Retail">
+      <Language ID="MatchOS" />
+    </Product>
+    <Product ID="VisioStd2019Volume" PIDKEY="7TQNQ-K3YQQ-3PFH7-CCPPM-X4VQ2">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+    </Product>
+    <Product ID="ProjectStd2019Volume" PIDKEY="C4F7P-NCP8C-6CQPT-MQHV9-JXD2M">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Property Name="AUTOACTIVATE" Value="1" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

@@ -1,12 +1,12 @@
 <Configuration>
   <Add OfficeClientEdition="64">
-    <Product ID="ProPlusRetail">
+    <Product ID="ProPlusVolume">
       <Language ID="MatchOS" />
     </Product>
-    <Product ID="VisioProRetail">
+    <Product ID="VisioProVolume">
       <Language ID="MatchOS" />
     </Product>
-    <Product ID="ProjectProRetail">
+    <Product ID="ProjectProVolume">
       <Language ID="MatchOS" />
     </Product>
   </Add>

@@ -1,0 +1,15 @@
+<Configuration ID="611e58b2-5fd0-4a64-bfa3-165d09ad758c">
+  <Add OfficeClientEdition="64" Channel="Current">
+    <Product ID="ProjectStd2019Volume" PIDKEY="C4F7P-NCP8C-6CQPT-MQHV9-JXD2M">
+      <Language ID="MatchOS" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Property Name="AUTOACTIVATE" Value="1" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

@@ -1,0 +1,14 @@
+<Configuration ID="38ce8a8d-3c30-47ee-a8c2-28fd26850b21">
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2019">
+    <Product ID="SkypeforBusinessEntry2019Retail">
+      <Language ID="MatchOS" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

@@ -18,8 +18,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 Developer Contact: alternate8592@duck.com
 
-#>
-
 function installO365() {
 
     Write-Host "Downloading Office 365"
@@ -28,7 +26,7 @@ function installO365() {
 
         try {
             
-            $o365_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o365_modified" -PassThru -Wait
+            $o365_download = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/download $o365_modified" -PassThru -Wait
 
             if($o365_download.ExitCode -eq 0) {
 
@@ -60,7 +58,7 @@ function installO365() {
 
     try {
 
-        $o365_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o365_modified" -PassThru -Wait
+        $o365_install = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/configure $o365_modified" -PassThru -Wait
 
         if($o365_install.ExitCode -eq 0) {
 
@@ -90,7 +88,7 @@ function installO2021() {
 
         try {
             
-            $o2021_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2021_modified" -PassThru -Wait
+            $o2021_download = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/download $o2021_modified" -PassThru -Wait
             
             if($o2021_download.ExitCode -eq 0) {
 
@@ -122,7 +120,7 @@ function installO2021() {
 
     try {
         
-        $o2021_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2021_modified" -PassThru -Wait
+        $o2021_install = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/configure $o2021_modified" -PassThru -Wait
 
         if($o2021_install.ExitCode -eq 0) {
 
@@ -152,7 +150,7 @@ function installO2019() {
         
         try {
 
-            $o2019_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2019_modified" -PassThru -Wait
+            $o2019_download = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/download $o2019_modified" -PassThru -Wait
 
             if($o2019_download.ExitCode -eq 0) {
                 
@@ -184,7 +182,7 @@ function installO2019() {
 
     try {
         
-        $o2019_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2019_modified" -PassThru -Wait
+        $o2019_install = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/configure $o2019_modified" -PassThru -Wait
 
         if($o2019_install.ExitCode -eq 0) {
             
@@ -214,7 +212,7 @@ function installO2016() {
         
         try {
 
-            $o2016_download = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/download $o2016_modified" -PassThru -Wait
+            $o2016_download = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/download $o2016_modified" -PassThru -Wait
 
             if($o2016_download.ExitCode -eq 0) {
                 
@@ -246,7 +244,7 @@ function installO2016() {
 
     try {
         
-        $o2016_install = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $o2016_modified" -PassThru -Wait
+        $o2016_install = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/configure $o2016_modified" -PassThru -Wait
 
         if($o2016_install.ExitCode -eq 0) {
             
@@ -272,7 +270,7 @@ function uninstallPrevious() {
 
     try {
 
-        $odt_office_scrub = Start-Process -FilePath "$env:homedrive\odt\setup.exe" -ArgumentList "/configure $uninstall" -PassThru -Wait
+        $odt_office_scrub = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\setup.exe" -ArgumentList "/configure $uninstall" -PassThru -Wait
 
         if($odt_office_scrub.ExitCode -eq 0) {
 
@@ -290,7 +288,7 @@ function uninstallPrevious() {
 
         try {
 
-            $office_scrub = Start-Process -FilePath "$env:homedrive\odt\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -PassThru -Wait
+            $office_scrub = Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\SaRACMD.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -PassThru -Wait
             
             if($office_scrub.ExitCode -eq 0) {
 
@@ -327,7 +325,7 @@ function configDownload() {
         $file_name = "odt.exe"
         
         Write-Host "Downloading Office Deployment Tool from $version"
-        Start-BitsTransfer -Source $version -Destination "$env:homedrive\odt\$file_name" -TransferType Download -Priority Foreground
+        Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -TransferType Download -Priority Foreground
 
     } catch {
 
@@ -339,7 +337,7 @@ function configDownload() {
         $saracmd_filename = "sara.zip"
         
         Write-Host "SaRACMD from $saracmd_version"
-        Start-BitsTransfer -Source $saracmd_version -Destination "$env:homedrive\odt\$saracmd_filename" -TransferType Download -Priority Foreground
+        Start-BitsTransfer -Source $saracmd_version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$saracmd_filename" -TransferType Download -Priority Foreground
 
     } catch {
         
@@ -347,10 +345,10 @@ function configDownload() {
 
     }
     
-    Start-Process -FilePath "$env:homedrive\odt\$file_name" -ArgumentList "/extract:$env:homedrive\odt /quiet /passive /norestart" -Wait
-    Remove-Item -Path "$env:homedrive\odt\configuration-*.xml", "$env:homedrive\odt\$file_name" -Force
-    Expand-Archive -Path "$env:homedrive\odt\sara.zip" -DestinationPath "$env:homedrive\odt\" -Force
-    Remove-Item -Path "$env:homedrive\odt\sara.zip" -Force
+    Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -ArgumentList "/extract:$env:HOMEDRIVE\OfficeDeploymentTool /quiet /passive /norestart" -Wait
+    Remove-Item -Path "$env:HOMEDRIVE\OfficeDeploymentTool\configuration-*.xml", "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -Force
+    Expand-Archive -Path "$env:HOMEDRIVE\OfficeDeploymentTool\sara.zip" -DestinationPath "$env:HOMEDRIVE\OfficeDeploymentTool\" -Force
+    Remove-Item -Path "$env:HOMEDRIVE\OfficeDeploymentTool\sara.zip" -Force
     
     return
 
@@ -376,18 +374,18 @@ function serviceHandling() {
 
 function fileHandling() {
 
-    $deployment_tool_path = "$env:homedrive\odt"
-    $logging_path_uninstall = "C:\office_deployment\odt_uninstall"
-    $logging_path_365 = "C:\office_deployment\odt_365"
-    $logging_path_2021 = "C:\office_deployment\odt_2021"
-    $logging_path_2019 = "C:\office_deployment\odt_2019"
-    $logging_path_2016 = "C:\office_deployment\odt_2016"
+    $DeploymentToolPath = "$env:HOMEDRIVE\OfficeDeploymentTool"
+    $LogPath = "C:\OfficeDeployment\odt_uninstall"
+    $LogPath = "C:\OfficeDeployment\odt_365"
+    $LogPath = "C:\OfficeDeployment\odt_2021"
+    $LogPath = "C:\OfficeDeployment\odt_2019"
+    $LogPath = "C:\OfficeDeployment\odt_2016"
 
     try {
         
-        if(-not(Test-Path -Path $deployment_tool_path -PathType Container)) {
+        if(-not(Test-Path -Path $DeploymentToolPath -PathType Container)) {
         
-            New-Item -Path "$deployment_tool_path" -ItemType Directory -Force
+            New-Item -Path "$DeploymentToolPath" -ItemType Directory -Force
         
         } else {
 
@@ -403,9 +401,9 @@ function fileHandling() {
 
     try {
 
-        if(-not(Test-Path -Path $logging_path_uninstall -PathType Container)) {
+        if(-not(Test-Path -Path $LogPath -PathType Container)) {
 
-            New-Item -Path "$logging_path_uninstall" -ItemType Directory -Force
+            New-Item -Path "$LogPath" -ItemType Directory -Force
 
         } else {
 
@@ -421,9 +419,9 @@ function fileHandling() {
     
     try {
 
-        if(-not(Test-Path -Path $logging_path_365 -PathType Container)) {
+        if(-not(Test-Path -Path $LogPath -PathType Container)) {
 
-            New-Item -Path "$logging_path_365" -ItemType Directory -Force
+            New-Item -Path "$LogPath" -ItemType Directory -Force
 
         } else {
 
@@ -439,9 +437,9 @@ function fileHandling() {
 
     try {
 
-        if(-not(Test-Path -Path $logging_path_2021 -PathType Container)) {
+        if(-not(Test-Path -Path $LogPath -PathType Container)) {
 
-            New-Item -Path "$logging_path_2021" -ItemType Directory -Force
+            New-Item -Path "$LogPath" -ItemType Directory -Force
 
         } else {
 
@@ -457,9 +455,9 @@ function fileHandling() {
 
     try {
 
-        if(-not(Test-Path -Path $logging_path_2019 -PathType Container)) {
+        if(-not(Test-Path -Path $LogPath -PathType Container)) {
 
-            New-Item -Path "$logging_path_2019" -ItemType Directory -Force
+            New-Item -Path "$LogPath" -ItemType Directory -Force
 
         } else {
 
@@ -475,9 +473,9 @@ function fileHandling() {
 
     try {
 
-        if(-not(Test-Path -Path $logging_path_2016 -PathType Container)) {
+        if(-not(Test-Path -Path $LogPath -PathType Container)) {
 
-            New-Item -Path "$logging_path_2016" -ItemType Directory -Force
+            New-Item -Path "$LogPath" -ItemType Directory -Force
 
         } else {
 
@@ -545,8 +543,8 @@ function optionSelection() {
         } elseif($option.Trim() -eq "6") {
 
             Set-Location -Path "..\"
-            Remove-Item -Path "$env:homedrive\odt" -Recurse -Force
-            Remove-Item -Path "$env:homedrive\office_deployment" -Recurse -Force
+            Remove-Item -Path "$env:HOMEDRIVE\OfficeDeploymentTool" -Recurse -Force
+            Remove-Item -Path "$env:HOMEDRIVE\office_deployment" -Recurse -Force
             Write-Host "Finished"
             Exit
 
@@ -569,7 +567,7 @@ function optionSelection() {
 function main() {
 
     fileHandling
-    Set-Location -Path "$env:homedrive\odt"
+    Set-Location -Path "$env:HOMEDRIVE\OfficeDeploymentTool"
     optionSelection
 
     return
@@ -582,17 +580,204 @@ $o2021_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/
 $o2019_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2019/office-2019-modified.xml"
 $o2016_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2016/office-2016-modified.xml"
 
-<#
-
 Full Installation Config Links
 $o365_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-365/office-365-full.xml"
 $o2021_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2021/office-2021-full.xml"
 $o2019_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2019/office-2019-full.xml"
 $o2016_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2016/office-2016-full.xml"
 
-#>
-
 #Uninstall Config Link
 $uninstall = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/uninstall/office-uninstall.xml"
 
 main
+
+#>
+
+
+
+
+
+
+
+
+<#---------------------------------------------------------------------------------------------------------------------------------------#>
+<#
+.SYNOPSIS
+    Program Name: Automated Office Deployment Script
+    Copyright (C) 2024 Alan R. Markley
+
+    This program aims to aid in deploying Click-to-Run(C2R) versions of Microsoft Office.
+    Supports versions 2016, 2019, 2021, and 365.
+    
+.NOTES
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+    Developer Contact: alternate8592@duck.com
+#>
+
+#Start Global Variables
+[String]$DeploymentToolPath = "$env:HOMEDRIVE\OfficeDeployment\OfficeDeploymentTool"
+[String]$LogPath = "$env:HOMEDRIVE\OfficeDeployment\Logs"
+[String]$SaraCmdPath = "$env:HOMEDRIVE\OfficeDeployment\SaraCmd"
+[String]$ConfigurationsPath = "$env:HOMEDRIVE\OfficeDeployment\Configs"
+[String[]]$FolderPaths = $DeploymentToolPath, $LogPath, $SaraCmdPath, $ConfigurationsPath
+#End Global Variables
+
+function Start-MainMenu() {
+
+    [CmdletBinding()]
+    param()
+
+    Write-Verbose -Message "Generating menu and menu options"
+    Write-Verbose -Message ""
+    
+    Write-Output -InputObject "`nMain Menu`n"
+    Write-Output -InputObject "----------------`n"
+    Write-Output -InputObject "1:Uninstall Office`n"
+    Write-Output -InputObject "2:Install Office 365`n"
+    Write-Output -InputObject "3:Install Office 2021`n"
+    Write-Output -InputObject "4:Install Office 2019`n"
+    Write-Output -InputObject "5:Install Office 2016`n"
+    Write-Output -InputObject "6:Exit`n"
+
+    Write-Verbose -Message "Reading user input to determine the selected option"
+    Write-Verbose -Message ""
+    
+    try {
+        
+        [String]$option = "$(Read-Host -Prompt "Select an option")"
+
+        if($option -eq "1") {
+
+            Write-Output -InputObject "Uninstall Office"
+
+        } elseif($option -eq "2") {
+
+            Write-Output -InputObject "Install Office 365"
+
+        } elseif($option -eq "3") {
+
+            Write-Output -InputObject "Install Office 2021"
+
+        } elseif($option -eq "4") {
+
+            Write-Output -InputObject "Install Office 2019"
+
+        } elseif($option -eq "5") {
+
+            Write-Output -InputObject "Install Office 2016"
+
+        } elseif($option -eq "6") {
+
+            Write-Output -InputObject "Exit"
+
+        } else {
+
+            throw "Invalid Response"
+
+        }
+
+    } catch {
+        
+        Write-Verbose -Message "$_"
+
+    }
+
+    return
+
+}
+
+function Start-Main() {
+
+    [CmdletBinding()]
+    param()
+
+    Write-Verbose -Message ""
+    Write-Verbose -Message "Verifying if the script is running on Windows"
+    Write-Verbose -Message ""
+
+    if($IsWindows -eq $true) {
+
+        Write-Verbose -Message "Operating system is Windows!"
+        Write-Verbose -Message ""
+        Write-Verbose -Message "Starting file operations"
+        Write-Verbose -Message ""
+
+        [Int32]$i = 0
+
+        $FolderPaths.ForEach(
+
+            {
+
+                try {
+
+                    if(-not(Test-Path -Path "$($FolderPaths[$i])" -PathType Container)) {
+                        
+                        New-Item -Path "$($FolderPaths[$i])" -ItemType Directory -Force *> $null
+
+                        throw "Directory: `"$($FolderPaths[$i])`" does not exist. Creating directory"
+                    
+                    } else {
+            
+                        if($FolderPaths[$i] -eq $DeploymentToolPath) {
+
+                            throw "Deployment folder exists"
+
+                        } elseif($FolderPaths[$i] -eq $LogPath) {
+
+                            throw "Log folder exists"
+
+                        } elseif($FolderPaths[$i] -eq $SaraCmdPath) {
+
+                            throw "SaraCmd folder exists"
+
+                        } elseif($FolderPaths[$i] -eq $ConfigurationsPath) {
+
+                            throw "Configuration folder exists"
+
+                        } else {
+
+                            throw "Index out of range or there is an array and global file-path variable mismatch"
+
+                        }
+                        
+                    }
+            
+                } catch {
+            
+                    Write-Verbose -Message "$_"
+                    Write-Verbose -Message ""
+
+                    $i++
+            
+                }
+
+            }
+
+        )
+
+        Start-MainMenu -Verbose
+
+    } else {
+
+        Write-Verbose -Message "Operating system is not Windows"
+        Write-Verbose -Message ""
+        
+        Write-Output -InputObject "The script is not running in a Windows environment. Please run this script in Windows 10+"
+
+    }
+
+    return
+
+}
+
+Start-Main -Verbose

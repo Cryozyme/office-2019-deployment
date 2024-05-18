@@ -7,4 +7,4 @@ You can run the script in multiple ways. You can run it through PowerShell Core 
 
 If you want to quickly run the script without directly downloading the file, then this command will do the trick:
 
-Invoke-WebRequest -UseBasicParsing "https://www.github.com/Cryozyme/office-deployment/raw/main/office_deployment.ps1" | Invoke-Expression
+Invoke-WebRequest -UseBasicParsing "https://www.github.com/Cryozyme/office-deployment/raw/refactor/office-deployment.ps1" | Invoke-Expression

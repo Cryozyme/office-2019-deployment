@@ -372,208 +372,6 @@ function serviceHandling() {
 
 }
 
-function fileHandling() {
-
-    $DeploymentToolPath = "$env:HOMEDRIVE\OfficeDeploymentTool"
-    $LogPath = "C:\OfficeDeployment\odt_uninstall"
-    $LogPath = "C:\OfficeDeployment\odt_365"
-    $LogPath = "C:\OfficeDeployment\odt_2021"
-    $LogPath = "C:\OfficeDeployment\odt_2019"
-    $LogPath = "C:\OfficeDeployment\odt_2016"
-
-    try {
-        
-        if(-not(Test-Path -Path $DeploymentToolPath -PathType Container)) {
-        
-            New-Item -Path "$DeploymentToolPath" -ItemType Directory -Force
-        
-        } else {
-
-            throw "Deployment Path Already Exists"
-            
-        }
-
-    } catch {
-
-        Write-Host "$_"
-
-    }
-
-    try {
-
-        if(-not(Test-Path -Path $LogPath -PathType Container)) {
-
-            New-Item -Path "$LogPath" -ItemType Directory -Force
-
-        } else {
-
-            throw "Uninstall Logging Path Already Exists"
-
-        }
-
-    } catch {
-
-        Write-Host "$_"
-
-    }
-    
-    try {
-
-        if(-not(Test-Path -Path $LogPath -PathType Container)) {
-
-            New-Item -Path "$LogPath" -ItemType Directory -Force
-
-        } else {
-
-            throw "Office 365 Logging Path Already Exists"
-
-        }
-
-    } catch {
-
-        Write-Host "$_"
-
-    }
-
-    try {
-
-        if(-not(Test-Path -Path $LogPath -PathType Container)) {
-
-            New-Item -Path "$LogPath" -ItemType Directory -Force
-
-        } else {
-
-            throw "Office 2021 Logging Path Already Exists"
-
-        }
-
-    } catch {
-
-        Write-Host "$_"
-
-    }
-
-    try {
-
-        if(-not(Test-Path -Path $LogPath -PathType Container)) {
-
-            New-Item -Path "$LogPath" -ItemType Directory -Force
-
-        } else {
-
-            throw "Office 2019 Logging Path Already Exists"
-
-        }
-
-    } catch {
-
-        Write-Host "$_"
-
-    }
-
-    try {
-
-        if(-not(Test-Path -Path $LogPath -PathType Container)) {
-
-            New-Item -Path "$LogPath" -ItemType Directory -Force
-
-        } else {
-
-            throw "Office 2016 Logging Path Already Exists"
-
-        }
-
-    } catch {
-
-        Write-Host "$_"
-
-    }
-
-    return
-
-}
-
-function optionSelection() {
-
-    Clear-Host
-
-    $option = "$(Read-Host -Prompt "Select an option`n----------------`n1:Uninstall Office`n2:Install Office 365`n3:Install Office 2021`n4:Install Office 2019`n5:Install Office 2016`n6:Exit`n")"
-
-    try {
-
-        if($option.Trim() -eq "1") {
-
-            serviceHandling
-            configDownload
-            uninstallPrevious
-            optionSelection
-
-        } elseif($option.Trim() -eq "2") {
-
-            serviceHandling
-            configDownload
-            uninstallPrevious
-            installO365
-            optionSelection
-
-        } elseif($option.Trim() -eq "3") {
-
-            serviceHandling
-            configDownload
-            uninstallPrevious
-            installO2021
-            optionSelection
-
-        } elseif($option.Trim() -eq "4") {
-
-            serviceHandling
-            configDownload
-            uninstallPrevious
-            installO2019
-            optionSelection
-
-        } elseif($option.Trim() -eq "5") {
-
-            serviceHandling
-            configDownload
-            uninstallPrevious
-            installO2016
-            optionSelection
-
-        } elseif($option.Trim() -eq "6") {
-
-            Set-Location -Path "..\"
-            Remove-Item -Path "$env:HOMEDRIVE\OfficeDeploymentTool" -Recurse -Force
-            Remove-Item -Path "$env:HOMEDRIVE\office_deployment" -Recurse -Force
-            Write-Host "Finished"
-            Exit
-
-        } else {
-
-            throw "Invalid Response"
-
-        }
-
-    } catch {
-
-        optionSelection
-
-    }
-
-    return
-    
-}
-
-function main() {
-
-    fileHandling
-    Set-Location -Path "$env:HOMEDRIVE\OfficeDeploymentTool"
-    optionSelection
-
-    return
-
-}
-
 #Annoying Apps Removed Config Links
 $o365_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-365/office-365-modified.xml"
 $o2021_modified = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/office-2021/office-2021-modified.xml"
@@ -588,8 +386,6 @@ $o2016_full = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main
 
 #Uninstall Config Link
 $uninstall = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/xml-config/uninstall/office-uninstall.xml"
-
-main
 
 #>
 
@@ -765,7 +561,7 @@ function Start-Main() {
 
         )
 
-        Start-MainMenu -Verbose
+        Start-MainMenu
 
     } else {
 
@@ -780,4 +576,4 @@ function Start-Main() {
 
 }
 
-Start-Main -Verbose
+Start-Main

@@ -1,0 +1,37 @@
+<Configuration ID="dc01f53b-f206-437d-8b78-15d67673f2c5">
+  <Info Description="" />
+  <Add OfficeClientEdition="64" Channel="Current">
+    <Product ID="O365ProPlusRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Bing" />
+    </Product>
+    <Product ID="AccessRuntimeRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Bing" />
+    </Product>
+    <Product ID="VisioProRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Bing" />
+    </Product>
+    <Product ID="ProjectProRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Bing" />
+      <ExcludeApp ID="Bing" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

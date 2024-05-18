@@ -421,11 +421,20 @@ $uninstall = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/
 #>
 
 #Start Global Variables
+
+#start folder paths
 [String]$DeploymentToolPath = "$env:HOMEDRIVE\OfficeDeployment\OfficeDeploymentTool"
 [String]$LogPath = "$env:HOMEDRIVE\OfficeDeployment\Logs"
 [String]$SaraCmdPath = "$env:HOMEDRIVE\OfficeDeployment\SaraCmd"
 [String]$ConfigurationsPath = "$env:HOMEDRIVE\OfficeDeployment\Configs"
 [String[]]$FolderPaths = $DeploymentToolPath, $LogPath, $SaraCmdPath, $ConfigurationsPath
+#end folder paths
+
+#start links
+[String]$UrlBase = ""
+[String[]]$Links = ""
+#end links
+
 #End Global Variables
 
 function Start-MainMenu() {
@@ -455,22 +464,112 @@ function Start-MainMenu() {
         if($option -eq "1") {
 
             Write-Output -InputObject "Uninstall Office"
+            try {
+        
+                $app_id = 49117
+                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $odt_version = "$url_base`?id=$app_id"
+                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
+                $file_pattern = "officedeploymenttool_"
+                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $file_name = "odt.exe"
+                
+                Write-Host "Downloading Office Deployment Tool from $version"
+                Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -TransferType Download -Priority Foreground
+        
+            } catch {
+        
+                Write-Host "$_"
+        
+            }
 
         } elseif($option -eq "2") {
 
             Write-Output -InputObject "Install Office 365"
+            try {
+        
+                $app_id = 49117
+                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $odt_version = "$url_base`?id=$app_id"
+                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
+                $file_pattern = "officedeploymenttool_"
+                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $file_name = "odt.exe"
+                
+                Write-Host "Downloading Office Deployment Tool from $version"
+                Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -TransferType Download -Priority Foreground
+        
+            } catch {
+        
+                Write-Host "$_"
+        
+            }
 
         } elseif($option -eq "3") {
 
             Write-Output -InputObject "Install Office 2021"
+            try {
+        
+                $app_id = 49117
+                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $odt_version = "$url_base`?id=$app_id"
+                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
+                $file_pattern = "officedeploymenttool_"
+                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $file_name = "odt.exe"
+                
+                Write-Host "Downloading Office Deployment Tool from $version"
+                Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -TransferType Download -Priority Foreground
+        
+            } catch {
+        
+                Write-Host "$_"
+        
+            }
 
         } elseif($option -eq "4") {
 
             Write-Output -InputObject "Install Office 2019"
+            try {
+        
+                $app_id = 49117
+                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $odt_version = "$url_base`?id=$app_id"
+                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
+                $file_pattern = "officedeploymenttool_"
+                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $file_name = "odt.exe"
+                
+                Write-Host "Downloading Office Deployment Tool from $version"
+                Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -TransferType Download -Priority Foreground
+        
+            } catch {
+        
+                Write-Host "$_"
+        
+            }
 
         } elseif($option -eq "5") {
 
             Write-Output -InputObject "Install Office 2016"
+            try {
+        
+                $app_id = 49117
+                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $odt_version = "$url_base`?id=$app_id"
+                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
+                $file_pattern = "officedeploymenttool_"
+                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $file_name = "odt.exe"
+                
+                Write-Host "Downloading Office Deployment Tool from $version"
+                Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -TransferType Download -Priority Foreground
+        
+            } catch {
+        
+                Write-Host "$_"
+        
+            }
 
         } elseif($option -eq "6") {
 
@@ -485,6 +584,7 @@ function Start-MainMenu() {
     } catch {
         
         Write-Verbose -Message "$_"
+        Start-MainMenu
 
     }
 
@@ -568,7 +668,13 @@ function Start-Main() {
         Write-Verbose -Message "Operating system is not Windows"
         Write-Verbose -Message ""
         
-        Write-Output -InputObject "The script is not running in a Windows environment. Please run this script in Windows 10+"
+        Write-Output -InputObject ""
+        Write-Output -InputObject "Either the script is not running in a Windows environment (Please run this script in Windows 10+)"
+        Write-Output -InputObject "OR"
+        Write-Output -InputObject "The script is being not being run in PowerShell version 7 or greater"
+        Write-Output -InputObject ""
+
+        Pause
 
     }
 

@@ -1,0 +1,27 @@
+<Configuration ID="303b1bbd-e610-42d2-b816-3ff8866b4ca5">
+  <Info Description="" />
+  <Add OfficeClientEdition="64" Channel="Current">
+    <Product ID="O365BusinessRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+    </Product>
+    <Product ID="AccessRuntimeRetail">
+      <Language ID="MatchOS" />
+    </Product>
+    <Product ID="VisioProRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+    </Product>
+    <Product ID="ProjectProRetail">
+      <Language ID="MatchOS" />
+      <ExcludeApp ID="Groove" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

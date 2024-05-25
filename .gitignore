@@ -1,7 +1,7 @@
-.vs/
-bin/
+/OfficeDeploymentGUI/.vs/
+/OfficeDeploymentGUI/bin/
+App.xaml
 *.sln
 *.csproj
 *.cs
 *.config
-App.xaml

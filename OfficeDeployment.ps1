@@ -316,12 +316,12 @@ function configDownload() {
 
     try {
         
-        $app_id = 49117
-        $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-        $odt_version = "$url_base`?id=$app_id"
-        $latest = Invoke-WebRequest -UseBasicParsing $odt_version
-        $file_pattern = "officedeploymenttool_"
-        $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+        $AppId = 49117
+        $UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+        $OdtVersion = "$UrlBase`?id=$AppId"
+        $LatestVersion = Invoke-WebRequest -UseBasicParsing $OdtVersion
+        $FilePattern = "officedeploymenttool_"
+        $version = (($LatestVersion.Links | Where-Object {$_.href -match "$FilePattern"}).href).Split("`n")[0].Trim()
         $file_name = "odt.exe"
         
         Write-Host "Downloading Office Deployment Tool from $version"
@@ -464,14 +464,15 @@ function Start-MainMenu() {
         if($option -eq "1") {
 
             Write-Output -InputObject "Uninstall Office"
+
             try {
         
-                $app_id = 49117
-                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-                $odt_version = "$url_base`?id=$app_id"
-                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
-                $file_pattern = "officedeploymenttool_"
-                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $AppId = 49117
+                $UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $OdtVersion = "$UrlBase`?id=$AppId"
+                $LatestVersion = Invoke-WebRequest -UseBasicParsing $OdtVersion
+                $FilePattern = "officedeploymenttool_"
+                $version = (($LatestVersion.Links | Where-Object {$_.href -match "$FilePattern"}).href).Split("`n")[0].Trim()
                 $file_name = "odt.exe"
                 
                 Write-Host "Downloading Office Deployment Tool from $version"
@@ -486,14 +487,15 @@ function Start-MainMenu() {
         } elseif($option -eq "2") {
 
             Write-Output -InputObject "Install Office 365"
+
             try {
         
-                $app_id = 49117
-                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-                $odt_version = "$url_base`?id=$app_id"
-                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
-                $file_pattern = "officedeploymenttool_"
-                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $AppId = 49117
+                $UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $OdtVersion = "$UrlBase`?id=$AppId"
+                $LatestVersion = Invoke-WebRequest -UseBasicParsing $OdtVersion
+                $FilePattern = "officedeploymenttool_"
+                $version = (($LatestVersion.Links | Where-Object {$_.href -match "$FilePattern"}).href).Split("`n")[0].Trim()
                 $file_name = "odt.exe"
                 
                 Write-Host "Downloading Office Deployment Tool from $version"
@@ -508,14 +510,15 @@ function Start-MainMenu() {
         } elseif($option -eq "3") {
 
             Write-Output -InputObject "Install Office 2021"
+
             try {
         
-                $app_id = 49117
-                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-                $odt_version = "$url_base`?id=$app_id"
-                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
-                $file_pattern = "officedeploymenttool_"
-                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $AppId = 49117
+                $UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $OdtVersion = "$UrlBase`?id=$AppId"
+                $LatestVersion = Invoke-WebRequest -UseBasicParsing $OdtVersion
+                $FilePattern = "officedeploymenttool_"
+                $version = (($LatestVersion.Links | Where-Object {$_.href -match "$FilePattern"}).href).Split("`n")[0].Trim()
                 $file_name = "odt.exe"
                 
                 Write-Host "Downloading Office Deployment Tool from $version"
@@ -530,14 +533,15 @@ function Start-MainMenu() {
         } elseif($option -eq "4") {
 
             Write-Output -InputObject "Install Office 2019"
+
             try {
         
-                $app_id = 49117
-                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-                $odt_version = "$url_base`?id=$app_id"
-                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
-                $file_pattern = "officedeploymenttool_"
-                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $AppId = 49117
+                $UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $OdtVersion = "$UrlBase`?id=$AppId"
+                $LatestVersion = Invoke-WebRequest -UseBasicParsing $OdtVersion
+                $FilePattern = "officedeploymenttool_"
+                $version = (($LatestVersion.Links | Where-Object {$_.href -match "$FilePattern"}).href).Split("`n")[0].Trim()
                 $file_name = "odt.exe"
                 
                 Write-Host "Downloading Office Deployment Tool from $version"
@@ -552,14 +556,15 @@ function Start-MainMenu() {
         } elseif($option -eq "5") {
 
             Write-Output -InputObject "Install Office 2016"
+            
             try {
         
-                $app_id = 49117
-                $url_base = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-                $odt_version = "$url_base`?id=$app_id"
-                $latest = Invoke-WebRequest -UseBasicParsing $odt_version
-                $file_pattern = "officedeploymenttool_"
-                $version = (($latest.Links | Where-Object {$_.href -match "$file_pattern"}).href).Split("`n")[0].Trim()
+                $AppId = 49117
+                $UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+                $OdtVersion = "$UrlBase`?id=$AppId"
+                $LatestVersion = Invoke-WebRequest -UseBasicParsing $OdtVersion
+                $FilePattern = "officedeploymenttool_"
+                $version = (($LatestVersion.Links | Where-Object {$_.href -match "$FilePattern"}).href).Split("`n")[0].Trim()
                 $file_name = "odt.exe"
                 
                 Write-Host "Downloading Office Deployment Tool from $version"

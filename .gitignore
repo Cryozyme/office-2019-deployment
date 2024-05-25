@@ -1,0 +1,7 @@
+.\OfficeDeploymentGUI\.vs
+.\OfficeDeploymentGUI\bin
+.\OfficeDeploymentGUI\*.sln
+.\OfficeDeploymentGUI\*.csproj
+.\OfficeDeploymentGUI\*.cs
+.\OfficeDeploymentGUI\*.config
+.\OfficeDeploymentGUI\App.xaml

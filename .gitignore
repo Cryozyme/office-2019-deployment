@@ -1,6 +1,7 @@
 /OfficeDeploymentGUI/.vs/
 /OfficeDeploymentGUI/bin/
 /.vscode/
+/.git/
 App.xaml
 *.sln
 *.csproj

@@ -463,7 +463,7 @@ function Start-OfficeScrub() {
 
             if($SaRACMDStart.ExitCode -ne 0) {
 
-                throw -InputObject "SaRACMD could not uninstall Office or Office was not found on the machine"
+                throw -InputObject "SaRACMD could not uninstall Office or Office was not found on the machine. Alternatively, you did not run this script as administrator"
 
             } else {
 

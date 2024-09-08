@@ -1,11 +1,2 @@
-/OfficeDeploymentGUI/.vs/
-/OfficeDeploymentGUI/bin/
-/OfficeDeploymentGUI/obj/
-/OfficeDeploymentGUI/Properties/
 /.vscode/
 /.git/
-App.xaml
-*.sln
-*.csproj
-*.cs
-*.config

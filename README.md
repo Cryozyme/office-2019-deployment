@@ -7,6 +7,8 @@ You can run the script through PowerShell Core (pwsh) or just click on the .ps1 
 
 If you want to quickly run the script without directly downloading the file, then this command will do the trick:
 
-```$temp="$($env:TEMP)";$filename="$(([System.Net.HttpWebRequest]::Create(`"https://www.github.com/Cryozyme/office-deployment/raw/refactor/OfficeDeployment.ps1`").GetResponse().ResponseUri.AbsoluteUri).Split(`"/`")[6])";Invoke-WebRequest -Uri "https://www.github.com/Cryozyme/office-deployment/raw/refactor/OfficeDeployment.ps1" -UseBasicParsing -OutFile "$($temp)\$($filename)";Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process;. "$($temp)\$($filename)";Remove-Item -Path "$($temp)\$($filename)" -Recurse -Force```
+```
+$temp="$($env:TEMP)";$filename="$(([System.Net.HttpWebRequest]::Create(`"https://www.github.com/Cryozyme/office-deployment/raw/refactor/OfficeDeployment.ps1`").GetResponse().ResponseUri.AbsoluteUri).Split(`"/`")[6])";Invoke-WebRequest -Uri "https://www.github.com/Cryozyme/office-deployment/raw/refactor/OfficeDeployment.ps1" -UseBasicParsing -OutFile "$($temp)\$($filename)";Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process;. "$($temp)\$($filename)";Remove-Item -Path "$($temp)\$($filename)" -Recurse -Force
+```
 
 NOTE: One-liner needed to be updated so that the new -Verbose option toggle would not cause an error when attempting to run the file remotely (without having it physically downloaded before hand). The one-liner now downloads the file into the user's temporary folder and executes from there. Once the program has exited successfully, it will delete itself.

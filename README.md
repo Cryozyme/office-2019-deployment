@@ -3,7 +3,7 @@ Contains a few xml files for office deployment using Office Deployment Tool (ODT
 **NOTE: This tool does not support the MSI version of Office 2016**
 
 # How To Use:
-You can run the script through PowerShell Core (pwsh) or just click on the .ps1 file when you download it. There is also a handy one-liner for your convenience. If you are not using the script, you can download the appropriate .xml file, download the [ODT](https://go.microsoft.com/fwlink/p/?LinkID=626065), extract the odt (just run the file), and run the extracted "setup.exe" in a terminal with these options --> ```/download {myxmlfile.xml} (without the brackets)```, then run "setup.exe" ```/configure {myxmlfile.xml}``` in the terminal when the other process has finished.
+You can run the script through PowerShell Core (pwsh) or just click on the .ps1 file when you download it. There is also a handy one-liner for your convenience. Whether you choose the one-liner or the direct file, both need to be run as administrator to work properly. If you are not using the script, you can download the appropriate .xml file, download the [ODT](https://go.microsoft.com/fwlink/p/?LinkID=626065), extract the odt (just run the file), and run the extracted "setup.exe" in a terminal with these options --> ```/download {myxmlfile.xml} (without the brackets)```, then run "setup.exe" ```/configure {myxmlfile.xml}``` in the terminal when the other process has finished.
 
 If you want to quickly run the script without directly downloading the file, then this command will do the trick:
 

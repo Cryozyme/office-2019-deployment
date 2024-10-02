@@ -316,16 +316,16 @@ function configDownload() {
 
     try {
         
-        $AppId = 49117
-        $UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-        $OdtVersion = "$UrlBase`?id=$AppId"
-        $LatestVersion = Invoke-WebRequest -UseBasicParsing $OdtVersion
-        $FilePattern = "officedeploymenttool_"
-        $version = (($LatestVersion.Links | Where-Object {$_.href -match "$FilePattern"}).href).Split("`n")[0].Trim()
-        $file_name = "odt.exe"
+        $appID = 49117
+        $urlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+        $odtVersion = "$urlBase`?id=$appID"
+        $LatestVersion = Invoke-WebRequest -UseBasicParsing $odtVersion
+        $filePattern = "officedeploymenttool_"
+        $version = (($LatestVersion.Links | Where-Object {$_.href -match "$filePattern"}).href).Split("`n")[0].Trim()
+        $fileName = "odt.exe"
         
         Write-Output -InputObject "Downloading Office Deployment Tool from $version"
-        Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -TransferType Download -Priority Foreground
+        Start-BitsTransfer -Source $version -Destination "$env:HOMEDRIVE\OfficeDeploymentTool\$fileName" -TransferType Download -Priority Foreground
 
     } catch {
 
@@ -345,8 +345,8 @@ function configDownload() {
 
     }
     
-    Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -ArgumentList "/extract:$env:HOMEDRIVE\OfficeDeploymentTool /quiet /passive /norestart" -Wait
-    Remove-Item -Path "$env:HOMEDRIVE\OfficeDeploymentTool\configuration-*.xml", "$env:HOMEDRIVE\OfficeDeploymentTool\$file_name" -Force
+    Start-Process -FilePath "$env:HOMEDRIVE\OfficeDeploymentTool\$fileName" -ArgumentList "/extract:$env:HOMEDRIVE\OfficeDeploymentTool /quiet /passive /norestart" -Wait
+    Remove-Item -Path "$env:HOMEDRIVE\OfficeDeploymentTool\configuration-*.xml", "$env:HOMEDRIVE\OfficeDeploymentTool\$fileName" -Force
     Expand-Archive -Path "$env:HOMEDRIVE\OfficeDeploymentTool\sara.zip" -DestinationPath "$env:HOMEDRIVE\OfficeDeploymentTool\" -Force
     Remove-Item -Path "$env:HOMEDRIVE\OfficeDeploymentTool\sara.zip" -Force
     
@@ -399,6 +399,7 @@ $uninstall = "https://raw.githubusercontent.com/Cryozyme/office-deployment/main/
 <#---------------------------------------------------------------------------------------------------------------------------------------#>
 [CmdletBinding()]
 param()
+
 <#
 .SYNOPSIS
     Program Name: Automated Office Deployment Script
@@ -425,16 +426,16 @@ param()
 #Start Global Variables
 
 #start folder paths
-[String[]]$FolderPaths = "$($env:HOMEDRIVE)\OfficeDeployment", "$($env:HOMEDRIVE)\OfficeDeployment\OfficeDeploymentTool", "$($env:HOMEDRIVE)\OfficeDeployment\Logs", "$($env:HOMEDRIVE)\OfficeDeployment\SaraCmd", "$($env:HOMEDRIVE)\OfficeDeployment\Configs"
+[String[]]$folderPaths = "$($env:HOMEDRIVE)\OfficeDeployment", "$($env:HOMEDRIVE)\OfficeDeployment\OfficeDeploymentTool", "$($env:HOMEDRIVE)\OfficeDeployment\Logs", "$($env:HOMEDRIVE)\OfficeDeployment\SaraCmd", "$($env:HOMEDRIVE)\OfficeDeployment\Configs"
 #end folder paths
 
 #start link variables
 [String]$SaraCmdLink = "https://aka.ms/SaRA_EnterpriseVersionFiles"
-[String]$UrlBase = "https://github.com/Cryozyme/office-deployment/raw/refactor/XmlConfig/"
-[String[]]$RemoteFilenames = "professional-vl-officeplus.xml, professional-vl-office.xml, standard-vl-officeplus.xml, standard-vl-office.xml"
-[String[]]$O2019Links = "$($UrlBase)Office2019/office/$($RemoteFilenames[0]), $($UrlBase)Office2019/office/$($RemoteFilenames[2]), $($UrlBase)Office2019/office/$($RemoteFilenames[1]), $($UrlBase)Office2019/office/$($RemoteFilenames[3])"
-[String[]]$O2021Links = "$($UrlBase)Office2021/office/$($RemoteFilenames[0]), $($UrlBase)Office2021/office/$($RemoteFilenames[2]), $($UrlBase)Office2021/office/$($RemoteFilenames[1]), $($UrlBase)Office2021/office/$($RemoteFilenames[3])"
-[String[]]$O365Links = "$($UrlBase)Office365/office/$($RemoteFilenames[0]), $($UrlBase)/Office365/office/$($RemoteFilenames[2]), $($UrlBase)/Office365/office/$($RemoteFilenames[1]), $($UrlBase)/Office365/office/$($RemoteFilenames[3])"
+[String]$urlBase = "https://github.com/Cryozyme/office-deployment/raw/refactor/XmlConfig/"
+[String[]]$remoteFilenames = "enterprise-retail-officeplus.xml", "business-retail-officeplus.xml", "professional-vl-officeplus.xml", "enterprise-retail-office.xml", "business-retail-office.xml", "standard-vl-officeplus.xml", "professional-vl-office.xml", "standard-vl-office.xml"
+[String[]]$O2019Links = "$($urlBase)Office2019/office/$($remoteFilenames[0])", "$($urlBase)Office2019/office/$($remoteFilenames[2])", "$($urlBase)Office2019/office/$($remoteFilenames[1])", "$($urlBase)Office2019/office/$($remoteFilenames[3])"
+[String[]]$O2021Links = "$($urlBase)Office2021/office/$($remoteFilenames[0])", "$($urlBase)Office2021/office/$($remoteFilenames[2])", "$($urlBase)Office2021/office/$($remoteFilenames[1])", "$($urlBase)Office2021/office/$($remoteFilenames[3])"
+[String[]]$O365Links = "$($urlBase)Office365/office/$($remoteFilenames[0])", "$($urlBase)Office365/office/$($remoteFilenames[2])", "$($urlBase)Office365/office/$($remoteFilenames[1])", "$($urlBase)Office365/office/$($remoteFilenames[3])"
 #end link variables
 
 #End Global Variables
@@ -447,19 +448,19 @@ function Start-OfficeScrub() {
     try {
         
         [String]$version = "$([System.Net.HttpWebRequest]::Create(`"https://aka.ms/SaRA_EnterpriseVersionFiles`").GetResponse().ResponseUri.AbsoluteUri)"
-        [String]$file_name = "$($version.Split("/")[8])"
+        [String]$fileName = "$($version.Split("/")[8])"
         
         Write-Output -InputObject "Downloading SaRACMD Tool from $($version)"
 
         if($PSBoundParameters["Verbose"] -eq $true) {
 
-            Start-BitsTransfer -Source "$($version)" -Destination "$($FolderPaths[3])\$($file_name)" -TransferType Download -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp, RedirectPolicyAllowReport, RedirectPolicyAllowSilent -Verbose
+            Start-BitsTransfer -Source "$($version)" -Destination "$($folderPaths[3])\$($fileName)" -TransferType Download -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp, RedirectPolicyAllowReport, RedirectPolicyAllowSilent -Verbose
 
-            Expand-Archive -Path "$($FolderPaths[3])\$($file_name)" -DestinationPath "$($FolderPaths[3])\" -Force -Verbose
+            Expand-Archive -Path "$($folderPaths[3])\$($fileName)" -DestinationPath "$($folderPaths[3])\" -Force -Verbose
 
-            Remove-Item -Path "$($FolderPaths[3])\$($file_name)" -Recurse -Force -Verbose
+            Remove-Item -Path "$($folderPaths[3])\$($fileName)" -Recurse -Force -Verbose
 
-            $SaRACMDStart = Start-Process -FilePath "$($FolderPaths[3])\SaRACmd.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -CloseOffice" -NoNewWindow -PassThru -Wait -Verbose
+            $SaRACMDStart = Start-Process -FilePath "$($folderPaths[3])\SaRACmd.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -CloseOffice" -NoNewWindow -PassThru -Wait -Verbose
 
             if($SaRACMDStart.ExitCode -ne 0) {
 
@@ -473,13 +474,13 @@ function Start-OfficeScrub() {
 
         } else {
 
-            Start-BitsTransfer -Source "$($version)" -Destination "$($FolderPaths[3])\$($file_name)" -TransferType Download -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp, RedirectPolicyAllowReport, RedirectPolicyAllowSilent
+            Start-BitsTransfer -Source "$($version)" -Destination "$($folderPaths[3])\$($fileName)" -TransferType Download -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp, RedirectPolicyAllowReport, RedirectPolicyAllowSilent
 
-            Expand-Archive -Path "$($FolderPaths[3])\$($file_name)" -DestinationPath "$($FolderPaths[3])\" -Force
+            Expand-Archive -Path "$($folderPaths[3])\$($fileName)" -DestinationPath "$($folderPaths[3])\" -Force
 
-            Remove-Item -Path "$($FolderPaths[3])\$($file_name)" -Recurse -Force
+            Remove-Item -Path "$($folderPaths[3])\$($fileName)" -Recurse -Force
 
-            $SaRACMDStart = Start-Process -FilePath "$($FolderPaths[3])\SaRACmd.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -CloseOffice" -NoNewWindow -PassThru -Wait
+            $SaRACMDStart = Start-Process -FilePath "$($folderPaths[3])\SaRACmd.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -CloseOffice" -NoNewWindow -PassThru -Wait
 
             if($SaRACMDStart.ExitCode -ne 0) {
 
@@ -516,16 +517,88 @@ function Start-ODTDownload() {
 
     try {
         
-        [String]$AppId = "49117"
-        [String]$UrlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
-        [String]$OdtVersion = "$($UrlBase)`?id=$($AppId)"
-        [String]$FilePattern = "officedeploymenttool_"
-        [String]$version = "$((($((Invoke-WebRequest -Uri "$($OdtVersion)").Links) | Where-Object {$_.href -match "$($FilePattern)"}).href).Split("`n")[0].Trim())"
-        [String]$file_name = "$($version.Split("/")[8])"
+        [String]$appID = "49117"
+        [String]$urlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+        [String]$odtVersion = "$($urlBase)`?id=$($appID)"
+        [String]$filePattern = "officedeploymenttool_"
+        [String]$version = "$((($((Invoke-WebRequest -Uri "$($odtVersion)").Links) | Where-Object {$_.href -match "$($filePattern)"}).href).Split("`n")[0].Trim())"
+        [String]$fileName = "$($version.Split("/")[8])"
         
         Write-Output -InputObject "Downloading Office Deployment Tool from $($version)"
 
-        Start-BitsTransfer -Source "$($version)" -Destination "$($FolderPaths[1])\$($file_name)" -TransferType Download -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp, RedirectPolicyAllowReport, RedirectPolicyAllowSilent
+        if($PSBoundParameters["Verbose"] -eq $true){
+
+            Start-BitsTransfer -Source "$($version)" -Destination "$($folderPaths[1])\$($fileName)" -TransferType Download -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp, RedirectPolicyAllowReport, RedirectPolicyAllowSilent -Verbose
+            
+            $startODTExtractor = Start-Process -FilePath "$($folderPaths[1])\$($fileName)" -ArgumentList "/extract:$($folderPaths[1])\ /norestart /passive /quiet" -NoNewWindow -PassThru -Wait -Verbose
+
+            if($startODTExtractor.ExitCode -ne 0) {
+
+               throw "The Office Deployment Toolkit either didn't start correctly or it had an error during the extraction process"
+
+            } else {
+
+                Remove-Item -Path "$($folderPaths[1])\$($fileName), $($folderPaths[1])\configuration-Office365-x64.xml" -Recurse -Force -Verbose
+                Remove-Item -Path "$($folderPaths[1])\configuration-Office365-x64.xml" -Recurse -Force -Verbose
+
+                $startODTSetupDownload = Start-Process -FilePath "$($folderPaths[1])\setup.exe" -ArgumentList "/download $($folderPaths[4])\O365-$($remoteFilenames[0])" -NoNewWindow -PassThru -Wait -WorkingDirectory "$($folderPaths[1])\" -Verbose
+
+                if($startODTSetupDownload.ExitCode -ne 0) {
+                    
+                    throw "The setup.exe could not download office using the specified XML file"
+
+                } else {
+
+                    $startODTSetupConfigure = Start-Process -FilePath "$($folderPaths[1])\setup.exe" -ArgumentList "/configure $($folderPaths[4])\O365-$($remoteFilenames[0])" -NoNewWindow -PassThru -Wait -WorkingDirectory "$($folderPaths[1])" -Verbose
+
+                    if($startODTSetupConfigure.ExitCode -ne 0) {
+
+                       throw "The setup.exe could not install office using the specified XML file"
+
+                    } else {
+                    }
+
+                }
+
+            }
+
+        } else {
+
+            Start-BitsTransfer -Source "$($version)" -Destination "$($folderPaths[1])\$($fileName)" -TransferType Download -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp, RedirectPolicyAllowReport, RedirectPolicyAllowSilent
+
+            $startODTExtractor = Start-Process -FilePath "$($folderPaths[1])\$($fileName)" -ArgumentList "/extract:$($folderPaths[1])\ /norestart /passive /quiet" -NoNewWindow -PassThru -Wait
+
+            if($startODTExtractor.ExitCode -ne 0) {
+
+                throw "The Office Deployment Toolkit either didn't start correctly or it had an error during the extraction process"
+
+            } else {
+
+                Remove-Item -Path "$($folderPaths[1])\$($fileName)" -Recurse -Force
+                Remove-Item -Path "$($folderPaths[1])\configuration-Office365-x64.xml" -Recurse -Force
+
+                $startODTSetupDownload = Start-Process -FilePath "$($folderPaths[1])\setup.exe" -ArgumentList "/download $($folderPaths[4])\O365-$($remoteFilenames[0])" -NoNewWindow -PassThru -Wait -WorkingDirectory "$($folderPaths[1])"
+
+                if($startODTSetupDownload.ExitCode -ne 0) {
+
+                    throw "The setup.exe could not download office using the specified XML file"
+
+                } else {
+
+                    $startODTSetupConfigure = Start-Process -FilePath "$($folderPaths[1])\setup.exe" -ArgumentList "/configure $($folderPaths[4])\O365-$($remoteFilenames[0])" -NoNewWindow -PassThru -Wait -WorkingDirectory "$($folderPaths[1])"
+
+                    if($startODTSetupConfigure.ExitCode -ne 0) {
+
+                        throw "The setup.exe could not install office using the specified XML file"
+
+                    } else {
+                    }
+
+                }
+
+            }
+
+        }
 
     } catch {
 
@@ -536,6 +609,47 @@ function Start-ODTDownload() {
 
         Clear-Host
         Start-MainMenu
+
+    }
+
+    return
+
+}
+
+function Start-DownloadConfigurations() {
+
+    [CmdletBinding()]
+    param(
+        
+        [Parameter(Mandatory=$true)][Int32]$menuSelection
+
+    )
+
+    switch ($menuSelection) {
+
+        2 {
+
+            Start-BitsTransfer -Source "$($O365Links[0])" -Destination "$($folderPaths[4])\O365-$($remoteFilenames[0])" -Priority Foreground -SecurityFlags IgnoreCertCNInvalid, IgnoreCertDateInvalid, IgnoreCertWrongUsage, IgnoreUnknownCA, RedirectPolicyAllowHttpsToHttp
+
+            return
+
+        } 3 {
+
+            return
+
+        } 4 {
+
+            return
+
+        } 5 {
+
+            return
+
+        } Default {
+
+            return
+
+        }
 
     }
 
@@ -559,40 +673,44 @@ function Start-MainMenu() {
     Write-Output -InputObject "4:Install Office 2019`n"
     Write-Output -InputObject "5:Install Office 2016`n"
     Write-Output -InputObject "6:Exit`n"
-
-    Write-Verbose -Message "Reading user input to determine the selected option"
-    Write-Verbose -Message ""
     
     try {
         
+        Write-Verbose -Message "Reading user input to determine the selected option"
+        Write-Verbose -Message ""
+
         [String]$option = "$(Read-Host -Prompt "Select an option")"
 
         if($option -eq "1") {
 
-            Write-Output -InputObject "Uninstall Office"
+            Write-Verbose -Message "Uninstall Office"
             Start-OfficeScrub
 
         } elseif($option -eq "2") {
 
-            Write-Output -InputObject "Install Office 365"
+            Write-Verbose -Message "Install Office 365"
+            Start-DownloadConfigurations 2
             Start-ODTDownload
 
         } elseif($option -eq "3") {
 
-            Write-Output -InputObject "Install Office 2021"
+            Write-Verbose -Message "Install Office 2021"
 
+            Start-DownloadConfigurations 3
             Start-ODTDownload
 
         } elseif($option -eq "4") {
 
-            Write-Output -InputObject "Install Office 2019"
+            Write-Verbose -Message "Install Office 2019"
 
+            Start-DownloadConfigurations 4
             Start-ODTDownload
 
         } elseif($option -eq "5") {
 
-            Write-Output -InputObject "Install Office 2016"
+            Write-Verbose -Message "Install Office 2016"
             
+            Start-DownloadConfigurations 5
             Start-ODTDownload
             
         } elseif($option -eq "6") {
@@ -636,65 +754,65 @@ function Start-Main() {
 
         [Int32]$i = 0
             
-        if(-not(Test-Path -Path "$($FolderPaths[$i])" -PathType Container)) {
+        if(-not(Test-Path -Path "$($folderPaths[$i])" -PathType Container)) {
 
             Write-Verbose -Message "The script has not been run on this machine before"
 
-            [Boolean]$first_run = $true
+            [Boolean]$firstRun = $true
 
         } else {
 
             Write-Verbose -Message "The script has been run on this machine before. It will delete previous files and folders"
 
-            [Boolean]$first_run = $false
+            [Boolean]$firstRun = $false
 
-        } if($first_run -eq $false) {
+        } if($firstRun -eq $false) {
 
             if($PSBoundParameters["Verbose"] -eq $true) {
 
-                Remove-Item -Path "$($FolderPaths[0])" -Recurse -Force -Verbose
+                Remove-Item -Path "$($folderPaths[0])" -Recurse -Force -Verbose
 
             } else {
 
-                Remove-Item -Path "$($FolderPaths[0])" -Recurse -Force
+                Remove-Item -Path "$($folderPaths[0])" -Recurse -Force
 
             }
             
         }
 
-        $FolderPaths.ForEach(
+        $folderPaths.ForEach(
 
             {
 
                 try {
 
-                    if(-not(Test-Path -Path "$($FolderPaths[$i])" -PathType Container)) {
+                    if(-not(Test-Path -Path "$($folderPaths[$i])" -PathType Container)) {
 
                         if($PSBoundParameters["Verbose"] -eq $true) {
 
-                            New-Item -Path "$($FolderPaths[$i])" -ItemType Directory -Force -Verbose
+                            New-Item -Path "$($folderPaths[$i])" -ItemType Directory -Force -Verbose
 
                         } else {
 
-                            New-Item -Path "$($FolderPaths[$i])" -ItemType Directory -Force
+                            New-Item -Path "$($folderPaths[$i])" -ItemType Directory -Force
 
                         }
                     
                     } else {
 
-                        if($FolderPaths[$i] -eq $FolderPaths[1]) {
+                        if($folderPaths[$i] -eq $folderPaths[1]) {
 
                             throw "Deployment folder exists"
 
-                        } elseif($FolderPaths[$i] -eq $FolderPaths[2]) {
+                        } elseif($folderPaths[$i] -eq $folderPaths[2]) {
 
                             throw "Log folder exists"
 
-                        } elseif($FolderPaths[$i] -eq $FolderPaths[3]) {
+                        } elseif($folderPaths[$i] -eq $folderPaths[3]) {
 
                             throw "SaraCmd folder exists"
 
-                        } elseif($FolderPaths[$i] -eq $FolderPaths[4]) {
+                        } elseif($folderPaths[$i] -eq $folderPaths[4]) {
 
                             throw "Configuration folder exists"
 
@@ -743,6 +861,15 @@ function Start-Main() {
 }
 
 Clear-Host
+
+if (-not([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
+
+    Write-Output -InputObject "The script will not continue because it must be launched in administrator mode to work properly"
+    Write-Verbose -Message "Elevation is required to run SaRACMD and Office Deployment Toolkit"
+    exit
+
+} else {
+}
 
 if($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent -eq $true) {
 

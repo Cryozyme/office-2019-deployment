@@ -447,7 +447,7 @@ function Start-OfficeScrub() {
 
     try {
         
-        [String]$version = "$([System.Net.HttpWebRequest]::Create(`"https://aka.ms/SaRA_EnterpriseVersionFiles`").GetResponse().ResponseUri.AbsoluteUri)"
+        [String]$version = "$([System.Net.HttpWebRequest]::Create(`"$($SaraCmdLink)`").GetResponse().ResponseUri.AbsoluteUri)"
         [String]$fileName = "$($version.Split("/")[8])"
         
         Write-Output -InputObject "Downloading SaRACMD Tool from $($version)"

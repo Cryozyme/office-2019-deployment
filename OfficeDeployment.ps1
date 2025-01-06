@@ -101,7 +101,7 @@ function Start-ODTDownload() {
     try {
         
         [String]$appID = "49117"
-        [String]$urlBase = "https://www.microsoft.com/en-us/download/confirmation.aspx"
+        [String]$urlBase = "https://www.microsoft.com/en-us/download/details.aspx"
         [String]$odtVersion = "$($urlBase)`?id=$($appID)"
         [String]$filePattern = "officedeploymenttool_"
         [String]$version = "$((($((Invoke-WebRequest -Uri "$($odtVersion)").Links) | Where-Object {$_.href -match "$($filePattern)"}).href).Split("`n")[0].Trim())"
@@ -273,8 +273,8 @@ function Start-Office365SubMenu() {
     Write-Verbose -Message "Generating menu and menu options"
     Write-Verbose -Message ""
 
-    Write-Output -InputObject "`nOffice 365 Main Menu`n"
-    Write-Output -InputObject "--------------------`n"
+    Write-Output -InputObject "`nOffice 365 Menu`n"
+    Write-Output -InputObject "---------------`n"
     Write-Output -InputObject "1:enterprise-retail-officeplus.xml`n"
     Write-Output -InputObject "2:business-retail-officeplus.xml`n"
     Write-Output -InputObject "3:enterprise-retail-office.xml`n"
